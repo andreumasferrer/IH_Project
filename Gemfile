@@ -47,4 +47,5 @@ group :development, :test do
 
   #Project specific gems
   gem 'awesome_print'
+  gem "letter_opener"
 end

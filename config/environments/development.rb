@@ -42,6 +42,6 @@ Rails.application.configure do
   # AMP: Devise requirements
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.action_mailer.perform_deliveries = true
-
+  # AMP: Use letter_opener gem
+  config.action_mailer.delivery_method = :letter_opener
 end
