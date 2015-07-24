@@ -79,11 +79,11 @@ Rails.application.configure do
 
   # TO DO - AMP: Devise requirements
   config.action_mailer.default_url_options = { host: 'http://plansapp.herokuapp.com'}
-  
+
   # AMP: Configure ActionMailer
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :adress => 'smtp.gmail.com',
+    :address => 'smtp.gmail.com',
     :port =>  587,
     :user_name => ENV['gmail_username'],
     :password => ENV['gmail_password'],
