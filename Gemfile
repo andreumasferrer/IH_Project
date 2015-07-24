@@ -34,6 +34,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Project specific gems
 gem 'devise'
+gem 'figaro'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -47,5 +48,9 @@ group :development, :test do
 
   #Project specific gems
   gem 'awesome_print'
-  gem "letter_opener"
+  gem 'letter_opener'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
