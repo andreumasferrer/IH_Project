@@ -5,5 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
-  has_many :plans       
+  has_many :plans, dependent: :destroy
+  has_many :plan_subscriptions, dependent: :destroy
+  has_many :subscribed_plans, class_name: 'Plan', through: :plan_subscriptions
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727111747) do
+ActiveRecord::Schema.define(version: 20150727141336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150727111747) do
     t.boolean  "all_day",    default: false, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "plan_id"
   end
 
   create_table "plan_locations", force: :cascade do |t|
@@ -32,6 +33,14 @@ ActiveRecord::Schema.define(version: 20150727111747) do
     t.float    "longitude"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "plan_id"
+  end
+
+  create_table "plan_subscriptions", force: :cascade do |t|
+    t.integer  "plan_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "plans", force: :cascade do |t|
