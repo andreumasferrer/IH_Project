@@ -11,10 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150724112153) do
+ActiveRecord::Schema.define(version: 20150727111747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "plan_dates", force: :cascade do |t|
+    t.datetime "start_date",                 null: false
+    t.datetime "end_date"
+    t.boolean  "all_day",    default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "plan_locations", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.text     "description"
+    t.text     "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string   "name",                           null: false
+    t.string   "short_desc"
+    t.text     "long_desc"
+    t.string   "image_url"
+    t.boolean  "open_dates",     default: false, null: false
+    t.boolean  "open_locations", default: false, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
