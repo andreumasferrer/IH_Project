@@ -1,9 +1,25 @@
+<h1>Group name</h1>
+<h3><%= @members.count%>
+  members
+</h3>
+<%= link_to('Suggest plan', new_plan_path)  %>
 
-<h1>Plans list/dash</h1>
-<%= link_to('New plan', new_plan_path)  %>
-
-<% @plans.each do |plan| %>
+<h4>Plans</h4>
+<ul>
+  <% @plans.each do |plan| %>
   <li>
     <strong><%= link_to plan.name, plan_path(plan)  %></strong>
+    -
+    <%= plan.short_desc %>
   </li>
-<% end %>
+  <% end %>
+</ul>
+
+<h4>Members</h4>
+<ul>
+  <% @members.each do |member| %>
+  <li>
+    <strong><%= member.email %></strong>
+  </li>
+  <% end %>
+</ul>

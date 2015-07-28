@@ -56,4 +56,5 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'faker', '~> 1.4.3' # TO DO: This is temporary!! Remove gem!
 end
