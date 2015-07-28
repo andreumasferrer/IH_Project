@@ -1,4 +1,9 @@
 
 <h1>Plans list/dash</h1>
 <%= link_to('New plan', new_plan_path)  %>
-<%= render 'layouts/footer' %>
+
+<% @plans.each do |plan| %>
+  <li>
+    <strong><%= link_to plan.name, plan_path(plan)  %></strong>
+  </li>
+<% end %>
