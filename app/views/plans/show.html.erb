@@ -1,1 +1,33 @@
-<h1>Show plan: <%= @plan.name %></h1>
+<h1><%= @plan.name %>
+<small>
+  <%= @plan.short_desc %>
+</small>
+</h1>
+<p>
+  Full details: <%= @plan.long_desc %>
+</p>
+
+<h4>Dates</h4>
+<ul>
+  <% @plan.plan_dates.each do |date| %>
+  <li>
+    start_date: <%= date.start_date %>
+    end_date: <%= date.end_date %>
+    All_day?: <%= date.all_day %>
+  </li>
+  <% end %>
+</ul>
+<h5>Add new date</h5>
+<%= render 'plans/new_plan_date_form', plan: @plan, plan_date: @plan.plan_dates.new%>
+
+<br>
+<h4>Locations</h4>
+<ul>
+  <% @plan.plan_locations.each do |location| %>
+  <li>
+    name: <%= location.name %>
+    description: <%= location.description %>
+    address: <%= location.address %>
+  </li>
+  <% end %>
+</ul>

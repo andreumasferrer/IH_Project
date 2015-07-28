@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'site#home'
-  resources :plans
+  resources :plans do
+      resources :plan_dates, only: [:create]
+  end
+
+  
 
 
   # The priority is based upon order of creation: first created -> highest priority.

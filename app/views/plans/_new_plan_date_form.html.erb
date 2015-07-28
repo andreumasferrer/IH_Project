@@ -1,0 +1,26 @@
+<%= form_for([plan,plan_date]) do |f| %>
+
+  <%= render 'layouts/errors', model: plan_date %>
+
+  <input type="hidden" name="plan_id" value="<%=plan.id%>">
+
+  <div class="field">
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_date %>
+    <%= f.date_field :end_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :all_day %>
+    <%= f.check_box :all_day %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
