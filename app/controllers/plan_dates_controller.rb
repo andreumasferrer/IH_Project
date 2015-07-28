@@ -11,7 +11,7 @@ class PlanDatesController < ApplicationController
       redirect_to plan_path(@plan), notice: 'Your date was successfully created.'
     else
       flash[:alert] = "Can't create date proposal"
-      render plan_path(@plan)
+      render 'plans/show'
     end
   end
 

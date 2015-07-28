@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   root 'site#home'
   resources :plans do
       resources :plan_dates, only: [:create]
+      resources :plan_locations, only: [:create]
   end
 
-  
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

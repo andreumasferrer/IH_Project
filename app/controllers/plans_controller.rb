@@ -7,6 +7,8 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id]) || (render "layouts/404")
+    @plan_date = @plan.plan_dates.new
+    @plan_location = @plan.plan_locations.new
   end
 
   def new

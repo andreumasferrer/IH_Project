@@ -1,0 +1,26 @@
+<%= form_for([plan,plan_location]) do |f| %>
+
+  <%= render 'layouts/errors', model: plan_location %>
+
+  <input type="hidden" name="plan_id" value="<%=plan.id%>">
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
