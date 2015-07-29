@@ -47,3 +47,30 @@
   <% end %>
 </ul>
 <h5>Add new location</h5>
+
+
+<h4>Users</h4>
+<h5>Users joining</h5>
+<ul>
+  <% @users_joining.each do |user| %>
+  <li>
+    <%= user.email %>
+  </li>
+  <% end %>
+</ul>
+<h5>Users not responding</h5>
+<ul>
+  <% @users_not_responding.each do |user| %>
+  <li>
+    <%= user.email %>
+  </li>
+  <% end %>
+</ul>
+<h5>Users dismissing</h5>
+<ul>
+  <% @users_dismissing.each do |user| %>
+  <li>
+    <%= user.email %>
+  </li>
+  <% end %>
+</ul>

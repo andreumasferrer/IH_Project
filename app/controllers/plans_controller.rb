@@ -9,6 +9,9 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id]) || (render "layouts/404")
     @plan_date = PlanDate.new
     @plan_location = PlanLocation.new
+    @users_joining = @plan.users_joining
+    @users_dismissing = @plan.users_dismissing
+    @users_not_responding = @plan.users_not_responding
   end
 
   def new

@@ -8,4 +8,33 @@ class Plan < ActiveRecord::Base
   validates :name, :user_id, presence: true
 
 
+  def users_joining
+    joining_subs = get_subscriptions_by_status(:OK)
+    return get_subscriptions_users(joining_subs)
+  end
+
+  def users_dismissing
+    joining_subs = get_subscriptions_by_status(:KO)
+    return get_subscriptions_users(joining_subs)
+  end
+
+  def users_not_responding
+
+    subscriptions_user_ids = self.plan_subscriptions.map {|subscription| subscription.user.id  }
+
+    return User.where('id NOT IN (?)',subscriptions_user_ids)
+
+
+  end
+
+  private
+
+  def get_subscriptions_by_status (status)
+      self.plan_subscriptions.select { |subscription|  subscription.status == status.to_s  }
+  end
+
+  def get_subscriptions_users (subscriptions_arr)
+    subscriptions_arr.map { |subscription| subscription.user  }
+  end
+
 end
