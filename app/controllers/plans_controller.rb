@@ -23,12 +23,29 @@ class PlansController < ApplicationController
     @plan = current_user.plans.new(plan_params)
 
     if @plan.save
-      redirect_to plans_path, notice: 'Plan was successfully created.'
+      redirect_to plan_path(@plan), notice: 'Plan was successfully created.'
     else
       flash[:alert] = "Can't create plan"
       render :new
     end
   end
+
+  def edit
+    @plan = Plan.find(params[:id])
+  end
+
+  def update
+    @plan = Plan.find(params[:id])
+    @plan.update(plan_params)
+
+    if @plan.save
+      redirect_to plan_path(@plan), notice: 'Plan was successfully updated.'
+    else
+      flash[:alert] = "Can't update plan"
+      render :edit
+    end
+  end
+
 
   private
 

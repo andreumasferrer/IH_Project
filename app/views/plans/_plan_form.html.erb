@@ -1,0 +1,24 @@
+<%= form_for(plan) do |f| %>
+
+<%= render 'layouts/errors', model: plan %>
+
+<div class="field">
+	<%=f.label :name %>
+  <%=f.text_field :name %>
+</div>
+
+<div class="field">
+	<%=f.label :short_desc %>
+  <%=f.text_field :short_desc %>
+</div>
+
+<div class="field">
+	<%=f.label :long_desc %>
+  <%=f.text_area :long_desc %>
+</div>
+
+<div class="actions">
+	<%=f.submit %>
+</div>
+
+<% end %>

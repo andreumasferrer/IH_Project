@@ -18,13 +18,11 @@ class Plan < ActiveRecord::Base
     return get_subscriptions_users(joining_subs)
   end
 
+  #TO DO: Change when group model is added
   def users_not_responding
     subscriptions_user_ids = self.plan_subscriptions.map {|subscription| subscription.user.id  }
-    if subscriptions_user_ids.empty?
-      return User.all
-    else
-      return User.where('id NOT IN (?)',subscriptions_user_ids)
-    end
+    return User.all if subscriptions_user_ids.empty?
+    User.where('id NOT IN (?)',subscriptions_user_ids)
   end
 
   private
