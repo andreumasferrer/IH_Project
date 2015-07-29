@@ -19,12 +19,12 @@ class Plan < ActiveRecord::Base
   end
 
   def users_not_responding
-
     subscriptions_user_ids = self.plan_subscriptions.map {|subscription| subscription.user.id  }
-
-    return User.where('id NOT IN (?)',subscriptions_user_ids)
-
-
+    if subscriptions_user_ids.empty?
+      return User.all
+    else
+      return User.where('id NOT IN (?)',subscriptions_user_ids)
+    end
   end
 
   private
