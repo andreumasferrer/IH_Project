@@ -1,12 +1,11 @@
 class PlansController < ApplicationController
-
   def index
     @plans = Plan.all
-    @members = User.all #TO DO: Change when group model is added
+    @members = User.all # TO DO: Change when group model is added
   end
 
   def show
-    @plan = Plan.find(params[:id]) || (render "layouts/404")
+    @plan = Plan.find(params[:id]) || (render 'layouts/404')
     @plan_date = PlanDate.new
     @plan_location = PlanLocation.new
     @users_joining = @plan.users_joining
@@ -19,7 +18,6 @@ class PlansController < ApplicationController
   end
 
   def create
-
     @plan = current_user.plans.new(plan_params)
 
     if @plan.save
@@ -46,11 +44,14 @@ class PlansController < ApplicationController
     end
   end
 
+  def destroy
+    Plan.destroy(params[:id])
+    redirect_to plans_path, notice: 'Plan was successfully deleted.'
+  end
 
   private
 
   def plan_params
-		params.require(:plan).permit(:name, :short_desc, :long_desc)
+    params.require(:plan).permit(:name, :short_desc, :long_desc)
   end
-
 end

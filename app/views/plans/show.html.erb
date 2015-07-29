@@ -17,7 +17,10 @@
   <%= button_to 'Join', plan_plan_subscriptions_path(@plan), params: { status: :OK }  %>
 <% end %>
 
-<%= link_to "Edit plan", edit_plan_path(@plan) %>
+<% if current_user && (current_user.id == @plan.user.id)%>
+  <%= link_to "Edit plan", edit_plan_path(@plan) %>
+  <%= link_to "Delete plan", plan_path(@plan), method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
 
 <p>
   Full details: <%= @plan.long_desc %>
@@ -30,6 +33,9 @@
     start_date: <%= date.start_date %>
     end_date: <%= date.end_date %>
     All_day?: <%= date.all_day %>
+    <% if current_user && (current_user.id == @plan.user.id)%>
+      <%= button_to 'Delete', plan_plan_date_path(@plan, date), method: :delete, data: { confirm: "Are you sure?" }  %>
+    <% end %>
   </li>
   <% end %>
 </ul>
@@ -44,6 +50,9 @@
     name: <%= location.name %>
     description: <%= location.description %>
     address: <%= location.address %>
+    <% if current_user && (current_user.id == @plan.user.id)%>
+      <%= button_to 'Delete', plan_plan_location_path(@plan, location), method: :delete, data: { confirm: "Are you sure?" }  %>
+    <% end %>
   </li>
   <% end %>
 </ul>

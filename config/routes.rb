@@ -3,10 +3,12 @@ Rails.application.routes.draw do
 
   root 'site#home'
   resources :plans do
-      resources :plan_dates, only: [:create]
-      resources :plan_locations, only: [:create]
+      resources :plan_dates, only: [:create, :destroy]
+      resources :plan_locations, only: [:create, :destroy]
       resources :plan_subscriptions, only: [:create, :update]
+      resources :plan_subscriptions_ok_dates, only: [:create, :update, :destroy]
   end
+
 
 
 

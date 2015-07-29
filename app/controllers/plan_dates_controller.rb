@@ -15,6 +15,11 @@ class PlanDatesController < ApplicationController
     end
   end
 
+  def destroy
+    plan_date = PlanDate.destroy(params[:id])
+    redirect_to plan_path(plan_date.plan), notice: 'Date was successfully deleted.'
+  end
+
   private
 
   def plan_date_params
