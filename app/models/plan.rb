@@ -5,7 +5,10 @@ class Plan < ActiveRecord::Base
   has_many :plan_subscriptions, dependent: :destroy
   has_many :subscribers, source: :user, through: :plan_subscriptions
 
+  STATUSES = %w(PLANNING ACCEPTED CANCELED)
+
   validates :name, :user_id, presence: true
+  validates_inclusion_of :status, in: STATUSES
 
 
   def users_joining

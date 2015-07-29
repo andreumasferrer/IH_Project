@@ -19,6 +19,7 @@ class PlansController < ApplicationController
 
   def create
     @plan = current_user.plans.new(plan_params)
+    @plan.status = :PLANNING
 
     if @plan.save
       redirect_to plan_path(@plan), notice: 'Plan was successfully created.'
@@ -52,6 +53,6 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:name, :short_desc, :long_desc)
+    params.require(:plan).permit(:name, :short_desc, :long_desc, :status)
   end
 end

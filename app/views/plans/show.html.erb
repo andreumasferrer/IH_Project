@@ -1,6 +1,6 @@
 <h1><%= @plan.name %>
 <small>
-  <%= @plan.short_desc %>
+  <%= @plan.short_desc %><em>(<%= @plan.status %>)</em>
 </small>
 </h1>
 <%= link_to "Back to group", plans_path %>
@@ -20,6 +20,15 @@
 <% if current_user && (current_user.id == @plan.user.id)%>
   <%= link_to "Edit plan", edit_plan_path(@plan) %>
   <%= link_to "Delete plan", plan_path(@plan), method: :delete, data: { confirm: "Are you sure?" } %>
+  <% if ['ACCEPTED','PLANNING'].include? @plan.status %>
+    <%= button_to 'Cancel plan', plan_path(@plan), method: :patch, params: { 'plan[status]': :CANCELED }  %>
+  <% end %>
+  <% if ['CANCELED','PLANNING'].include? @plan.status %>
+    <%= button_to 'Accept plan', plan_path(@plan), method: :patch, params: { 'plan[status]': :ACCEPTED}  %>
+  <% end %>
+  <% if ['CANCELED','ACCEPTED'].include? @plan.status %>
+    <%= button_to 'Planning', plan_path(@plan), method: :patch, params: { 'plan[status]': :PLANNING}  %>
+  <% end %>
 <% end %>
 
 <p>
