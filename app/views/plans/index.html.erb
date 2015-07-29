@@ -11,6 +11,10 @@
     <strong><%= link_to plan.name, plan_path(plan)  %></strong>
     -
     <%= plan.short_desc %>
+    <% unless PlanSubscription.exists?(user: current_user, plan: plan) %>
+      <%= button_to 'Dismiss', plan_plan_subscriptions_path(plan), params: { status: :KO }  %>
+      <%= button_to 'Join', plan_plan_subscriptions_path(plan), params: { status: :OK }  %>
+    <% end %>
   </li>
   <% end %>
 </ul>

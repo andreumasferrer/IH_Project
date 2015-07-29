@@ -19,5 +19,4 @@ class PlanLocationsController < ApplicationController
       params.require(:plan_location).permit(:name, :description, :address)
     end
 
-
 end

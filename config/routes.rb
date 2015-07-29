@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :plans do
       resources :plan_dates, only: [:create]
       resources :plan_locations, only: [:create]
+      resources :plan_subscriptions, only: [:create]
   end
 
 
