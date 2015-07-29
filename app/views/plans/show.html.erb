@@ -4,6 +4,21 @@
 </small>
 </h1>
 <p>
+  <% plan_subscription = PlanSubscription.find_by(user: current_user, plan: @plan) %>
+  <% if plan_subscription  %>
+    <% if plan_subscription.status == 'OK' %>
+      <%= button_to 'Dismiss', plan_plan_subscription_path(@plan,plan_subscription), method: :patch, params: { status: :KO },
+        data: { confirm: "Are you sure?" }  %>
+    <% else %>
+      <%= button_to 'Join', plan_plan_subscription_path(@plan,plan_subscription), method: :patch, params: { status: :OK }  %>
+    <% end %>
+  <% else %>
+    <%= button_to 'Dismiss', plan_plan_subscriptions_path(@plan), params: { status: :KO }  %>
+    <%= button_to 'Join', plan_plan_subscriptions_path(@plan), params: { status: :OK }  %>
+  <% end %>
+
+</p>
+<p>
   Full details: <%= @plan.long_desc %>
 </p>
 
