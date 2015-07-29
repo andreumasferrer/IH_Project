@@ -3,7 +3,7 @@ class Plan < ActiveRecord::Base
   has_many :plan_dates, dependent: :destroy
   has_many :plan_locations, dependent: :destroy
   has_many :plan_subscriptions, dependent: :destroy
-  has_many :subscribers, class_name: 'User', through: :plan_subscriptions
+  has_many :subscribers, source: :user, through: :plan_subscriptions
 
   validates :name, :user_id, presence: true
 
@@ -20,9 +20,10 @@ class Plan < ActiveRecord::Base
 
   #TO DO: Change when group model is added
   def users_not_responding
-    subscriptions_user_ids = self.plan_subscriptions.map {|subscription| subscription.user.id  }
-    return User.all if subscriptions_user_ids.empty?
-    User.where('id NOT IN (?)',subscriptions_user_ids)
+    # subscriptions_user_ids = self.plan_subscriptions.map {|subscription| subscription.user.id  }
+    subscribers_user_ids = self.subscribers.map {|user| user.id  }
+    return User.all if subscribers_user_ids.empty?
+    User.where('id NOT IN (?)',subscribers_user_ids)
   end
 
   private

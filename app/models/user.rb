@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   has_many :plans, dependent: :destroy
   has_many :plan_subscriptions, dependent: :destroy
   has_many :subscribed_plans, class_name: 'Plan', through: :plan_subscriptions
+
 end
