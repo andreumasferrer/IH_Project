@@ -33,6 +33,14 @@
     start_date: <%= date.start_date %>
     end_date: <%= date.end_date %>
     All_day?: <%= date.all_day %>
+    <% if date.accepted_by_user?(current_user) %>
+      Accepted
+      <% plan_subscription_ok_date = date.get_subscription_ok_date(current_user) %>
+      <%= button_to 'Refuse', plan_subscription_ok_date_path(plan_subscription_ok_date), method: :delete %>
+    <% else %>
+      Not accepted yet <%= button_to 'Accept', plan_subscription_ok_dates_path,
+                                      params: {plan_subscription_id: plan_subscription.id, plan_date_id: date.id} %>
+    <% end %>
     <% if current_user && (current_user.id == @plan.user.id)%>
       <%= button_to 'Delete', plan_plan_date_path(@plan, date), method: :delete, data: { confirm: "Are you sure?" }  %>
     <% end %>

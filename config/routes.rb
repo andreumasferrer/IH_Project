@@ -6,8 +6,9 @@ Rails.application.routes.draw do
       resources :plan_dates, only: [:create, :destroy]
       resources :plan_locations, only: [:create, :destroy]
       resources :plan_subscriptions, only: [:create, :update]
-      resources :plan_subscriptions_ok_dates, only: [:create, :update, :destroy]
   end
+
+  resources :plan_subscription_ok_dates, only: [:create, :destroy]
 
 
 
