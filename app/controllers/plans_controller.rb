@@ -1,7 +1,11 @@
 class PlansController < ApplicationController
   def index
-    @plans = Plan.all
     @members = User.all # TO DO: Change when group model is added
+    subscriptons_ok = current_user.plan_subscriptions.where(status: 'OK')
+    @plans_ok = subscriptons_ok.map{|subs| subs.plan}
+    subscriptons_ko = current_user.plan_subscriptions.where(status: 'KO')
+    @plans_ko = subscriptons_ko.map{|subs| subs.plan}
+    @plans_not_responded = Plan.joins('LEFT JOIN plan_subscriptions ps ON ps.plan_id = plans.id').where('ps.id IS NULL')
   end
 
   def show

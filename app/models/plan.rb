@@ -10,6 +10,9 @@ class Plan < ActiveRecord::Base
   validates :name, :user_id, presence: true
   validates_inclusion_of :status, in: STATUSES
 
+  def get_subscription(user)
+    return self.plan_subscriptions.where(user_id: user.id).first
+  end
 
   def users_joining
     joining_subs = get_subscriptions_by_status(:OK)

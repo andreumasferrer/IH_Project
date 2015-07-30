@@ -4,28 +4,45 @@
 </h3>
 <%= link_to('Suggest plan', new_plan_path)  %>
 
-<h4>Plans</h4>
+<h4>Plans Not responded</h4>
 <ul>
-  <% @plans.each do |plan| %>
+  <% @plans_not_responded.each do |plan| %>
+  <li>
+    <strong><%= link_to plan.name, plan_path(plan)  %></strong>
+    -
+      <%= button_to 'Dismiss', plan_plan_subscriptions_path(plan), params: { status: :KO }  %>
+      <%= button_to 'Join', plan_plan_subscriptions_path(plan), params: { status: :OK }  %>
+  </li>
+  <% end %>
+</ul>
+
+<h4>Plans OK</h4>
+<ul>
+  <% @plans_ok.each do |plan| %>
   <li>
     <strong><%= link_to plan.name, plan_path(plan)  %></strong>
     -
     <%= plan.short_desc %>
-    <% plan_subscription = PlanSubscription.find_by(user: current_user, plan: plan) %>
-    <% if plan_subscription  %>
-      <% if plan_subscription.status == 'OK' %>
-        <%= button_to 'Dismiss', plan_plan_subscription_path(plan,plan_subscription), method: :patch, params: { status: :KO },
+
+        <%= button_to 'Dismiss', plan_plan_subscription_path(plan,plan.get_subscription(current_user)), method: :patch, params: { status: :KO },
             data: { confirm: "Are you sure?" }   %>
-      <% else %>
-        <%= button_to 'Join', plan_plan_subscription_path(plan,plan_subscription), method: :patch, params: { status: :OK }  %>
-      <% end %>
-    <% else %>
-      <%= button_to 'Dismiss', plan_plan_subscriptions_path(plan), params: { status: :KO }  %>
-      <%= button_to 'Join', plan_plan_subscriptions_path(plan), params: { status: :OK }  %>
-    <% end %>
+
   </li>
   <% end %>
 </ul>
+
+<h4>Plans KO</h4>
+<ul>
+  <% @plans_ko.each do |plan| %>
+  <li>
+    <strong><%= link_to plan.name, plan_path(plan)  %></strong>
+    -
+    <%= plan.short_desc %>
+    <%= button_to 'Join', plan_plan_subscription_path(plan,plan.get_subscription(current_user)), method: :patch, params: { status: :OK }  %>
+  </li>
+  <% end %>
+</ul>
+
 
 <h4>Members</h4>
 <ul>
