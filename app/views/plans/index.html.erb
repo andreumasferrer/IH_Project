@@ -1,54 +1,100 @@
-<h1>Group name</h1>
-<h3><%= @members.count%>
-  members
-</h3>
-<%= link_to('Suggest plan', new_plan_path)  %>
 
-<h4>Plans Not responded</h4>
-<ul>
-  <% @plans_not_responded.each do |plan| %>
-  <li>
-    <strong><%= link_to plan.name, plan_path(plan)  %></strong>
-    -
-      <%= button_to 'Dismiss', plan_plan_subscriptions_path(plan), params: { status: :KO }  %>
-      <%= button_to 'Join', plan_plan_subscriptions_path(plan), params: { status: :OK }  %>
-  </li>
-  <% end %>
-</ul>
+  <div class="group-header">
+    <div class="container">
 
-<h4>Plans OK</h4>
-<ul>
-  <% @plans_ok.each do |plan| %>
-  <li>
-    <strong><%= link_to plan.name, plan_path(plan)  %></strong>
-    -
-    <%= plan.short_desc %>
+      <div class="row">
 
-        <%= button_to 'Dismiss', plan_plan_subscription_path(plan,plan.get_subscription(current_user)), method: :patch, params: { status: :KO },
+        <div class="col-md-2">
+          <img src="<%= image_url("GOTAvatar.jpg") %>"
+               alt="Group Image" class=" img-thumbnail group-avatar">
+        </div>
+        <div class="col-md-10 ">
+          <h1>Seven Kingdoms
+          </h1>
+          <div class="lead">
+            <%= @members.count%> members
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="group-sub-header">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-10 col-md-offset-2">
+          <%= link_to('New Plan', new_plan_path, class: 'btn btn-primary pull-right')  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<br>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-9">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Plans</h3>
+        </div>
+        <div class="panel-body">
+      <h4>Plans Not responded</h4>
+      <ul>
+        <% @plans_not_responded.each do |plan| %>
+        <li>
+          <strong><%= link_to plan.name, plan_path(plan)  %></strong>
+          -
+          <%= button_to 'Dismiss', plan_plan_subscriptions_path(plan), params: { status: :KO }  %>
+          <%= button_to 'Join', plan_plan_subscriptions_path(plan), params: { status: :OK }  %>
+        </li>
+        <% end %>
+      </ul>
+
+      <h4>Plans OK</h4>
+      <ul>
+        <% @plans_ok.each do |plan| %>
+        <li>
+          <strong><%= link_to plan.name, plan_path(plan)  %></strong>
+          -
+          <%= plan.short_desc %>
+
+          <%= button_to 'Dismiss', plan_plan_subscription_path(plan,plan.get_subscription(current_user)), method: :patch, params: { status: :KO },
             data: { confirm: "Are you sure?" }   %>
 
-  </li>
-  <% end %>
-</ul>
+        </li>
+        <% end %>
+      </ul>
 
-<h4>Plans KO</h4>
-<ul>
-  <% @plans_ko.each do |plan| %>
-  <li>
-    <strong><%= link_to plan.name, plan_path(plan)  %></strong>
-    -
-    <%= plan.short_desc %>
-    <%= button_to 'Join', plan_plan_subscription_path(plan,plan.get_subscription(current_user)), method: :patch, params: { status: :OK }  %>
-  </li>
-  <% end %>
-</ul>
+      <h4>Plans KO</h4>
+      <ul>
+        <% @plans_ko.each do |plan| %>
+        <li>
+          <strong><%= link_to plan.name, plan_path(plan)  %></strong>
+          -
+          <%= plan.short_desc %>
+          <%= button_to 'Join', plan_plan_subscription_path(plan,plan.get_subscription(current_user)), method: :patch, params: { status: :OK }  %>
+        </li>
+        <% end %>
+      </ul>
 
+    </div>
+</div>
+    </div>
 
-<h4>Members</h4>
-<ul>
-  <% @members.each do |member| %>
-  <li>
-    <strong><%= member.email %></strong>
-  </li>
-  <% end %>
-</ul>
+    <div class="col-md-3">
+      <h4>Members</h4>
+      <ul>
+        <% @members.each do |member| %>
+        <li>
+          <strong><%= member.email %></strong>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+</div>

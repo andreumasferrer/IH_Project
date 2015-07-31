@@ -1,4 +1,5 @@
-<nav class="navbar navbar-default navbar-static-top" role="navigation">
+<div id="ribbon"></div>
+<nav class="navbar navbar-default navbar-static-top app-navbar" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -8,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">PlansApp</a>
+      <a class="navbar-brand app-navbar-brand" href="/"><strong>PlansApp</strong></a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -22,7 +23,7 @@
         </li>
         <% else %>
           <li><%= link_to('Login', new_user_session_path) %></li>
-          <li><%= button_to('Sign Up', new_user_registration_path, :method => :get, form_class: "navbar-form", class: "btn btn-default")  %></li>
+          <li><%= button_to('Sign Up', new_user_registration_path, :method => :get, form_class: "navbar-form", class: "btn btn-success")  %></li>
         <% end %>
 
       </ul>
