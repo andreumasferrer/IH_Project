@@ -4,10 +4,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-2">
-          <img src="<%= image_url("GOTAvatar.jpg") %>" alt="Group Image" class="img-thumbnail group-avatar hidden-xs hidden-sm">
+          <img src="<%= image_url("GRPAvatar.jpg") %>" alt="Group Image" class="img-thumbnail group-avatar hidden-xs hidden-sm">
         </div>
         <div class="col-md-10 ">
-          <h1>Seven Kingdoms Squad</h1>
+          <h1>Deadly Viper Assassination Squad</h1>
           <div class="lead">
             <%= @members.count%> members
           </div>
@@ -22,7 +22,7 @@
           <ul class="nav nav-pills " role="tablist" id="myTab">
             <li class="active">
               <a href="#all" data-toggle="tab" id="all-pill">
-                <span class="badge pull-right"><%= @plans_not_responded.count+@plans_ok.count+@plans_ko.count %></span>
+                <span class="badge pull-right "><%= @plans_not_responded.count+@plans_ok.count+@plans_ko.count %></span>
                 All plans &nbsp;
               </a>
             </li>
@@ -37,16 +37,16 @@
               <li>
                 <a href="#new" data-toggle="tab" id="new-pill">
                   <span class="badge pull-right"><%= @plans_not_responded.count%></span>
-                  Pending &nbsp;</a></li>
+                  New &nbsp;</a></li>
             <% end %>
 
             <li><a href="#joined" data-toggle="tab" id="joined-pill">
               <span class="badge pull-right"><%= @plans_ok.count%></span>
-              Joined &nbsp;</a></li>
+              Attending &nbsp;</a></li>
 
             <li><a href="#refused" data-toggle="tab" id="refused-pill">
               <span class="badge pull-right"><%= @plans_ko.count%></span>
-              Refused &nbsp;</a></li>
+              Declined &nbsp;</a></li>
           </ul>
         </div>
         <div class="col-md-1">
@@ -79,10 +79,14 @@
 
       <div class="tab-content">
         <div class="tab-pane fade in active" id="all">
+
           <% if @plans_not_responded.count > 0%>
+            <p class="lead">New plans</p>
             <%= render 'plans/index/new_plans'%>
           <% end %>
+          <p class="lead">Plans you are attending</p>
           <%= render 'plans/index/joined_plans'%>
+          <p class="lead">Declined plans </p>
           <%= render 'plans/index/refused_plans'%>
         </div>
         <div class="tab-pane fade" id="new">

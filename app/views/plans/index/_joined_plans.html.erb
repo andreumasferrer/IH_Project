@@ -1,21 +1,40 @@
-<div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title">Joined Plans</h3>
-  </div>
-  <div class="panel-body">
 
-    <ul>
-      <% @plans_ok.each do |plan| %>
-      <li>
-        <strong><%= link_to plan.name, plan_path(plan)  %></strong>
-        -
-        <%= plan.short_desc %>
+<ul class="list-unstyled">
+  <% @plans_ok.each do |plan| %>
+  <li>
+    <div class="container-fluid plan-card plan-card-joined">
+      <div class="row">
+        <div class="col-md-10">
+          <a href="<%=plan_path(plan)%>">
+          <div class="media">
+            <!-- <a class="pull-left" href="<%=plan_path(plan)%>"> -->
+              <img alt="Plan image" class="media-object pull-left" src="http://lorempixel.com/80/80">
+            <!-- </a> -->
+            <div class="media-body plans-content ">
+              <h3 class="media-heading">
+                <!-- <strong><%= link_to plan.name, plan_path(plan)  %></strong> -->
+                <strong><%= plan.name %></strong>
+              </h3>
+              <span class="lead text-muted"><%= plan.short_desc %></span>
+            </div>
+          </div>
+        </a>
+        </div>
+        <div class="col-md-2 text-center">
+          <div class="plans-content ">
+            <span class="glyphicon glyphicon-ok-sign user-plan-status"></span>
+            <div>
+              <small>
+              <%= button_to 'Decline', plan_plan_subscription_path(plan,plan.get_subscription(current_user)), method: :patch, params: { status: :KO },
+              data: { confirm: "Are you sure?" }  , class: "btn btn-xs btn-link text-muted"  %>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  <% end %>
+</ul>
 
-        <%= button_to 'Refuse', plan_plan_subscription_path(plan,plan.get_subscription(current_user)), method: :patch, params: { status: :KO },
-          data: { confirm: "Are you sure?" }   %>
-
-      </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+<br>

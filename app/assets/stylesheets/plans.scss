@@ -9,17 +9,51 @@
   background-color: white;
 }
 
+.plan-card:hover{
+  background-color: rgb(231,232,239);
+
+}
+
+.plan-card .media{
+  margin: 0;
+}
+
+.plan-card a:hover{
+  text-decoration: none;
+}
+
+
+.plan-card-new{
+  border-left: 5px solid rgb(82,176,214);
+}
+
+.plan-card-joined{
+  border-left: 5px solid rgb(86,174,61);
+}
+
 .plan-card-refused{
   border-left: 5px solid red;
-  -webkit-filter: grayscale(1);
-  filter: grayscale(1);
+  -webkit-filter: opacity(0.7) grayscale(1) ;
+  filter:  opacity(0.7) grayscale(1);
+
 }
 
 .plan-card-refused:hover {
   -webkit-filter: grayscale(0);
   filter: grayscale(0);
+  -webkit-filter: opacity(1);
+  filter: opacity(1);
 }
 
 .plans-content{
-  padding: 0.5em 0 0.5em 0;
+  padding: 0.5em 0 0.4em 0;
+}
+
+.plans-content .btn-success{
+  margin-bottom: 0.2em;
+}
+
+
+.plans-content .user-plan-status{
+  font-size: 3em;
 }

@@ -1,17 +1,34 @@
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title">Pending Plans</h3>
-  </div>
-  <div class="panel-body">
-    <ul>
-      <% @plans_not_responded.each do |plan| %>
-      <li>
-        <strong><%= link_to plan.name, plan_path(plan)  %></strong>
-        -
-        <%= button_to 'Refuse', plan_plan_subscriptions_path(plan), params: { status: :KO }  %>
-        <%= button_to 'Join', plan_plan_subscriptions_path(plan), params: { status: :OK }  %>
-      </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+
+<ul class="list-unstyled">
+  <% @plans_not_responded.each do |plan| %>
+  <li>
+    <div class="container-fluid plan-card plan-card-new">
+      <div class="row">
+        <div class="col-md-9">
+          <a href="<%=plan_path(plan)%>">
+            <div class="media">
+<!-- <a class="pull-left" href="<%=plan_path(plan)%>"> -->
+              <img alt="Plan image" class="media-object pull-left" src="http://lorempixel.com/80/80">
+<!-- </a> -->
+              <div class="media-body plans-content ">
+                <h3 class="media-heading">
+<!-- <strong><%= link_to plan.name, plan_path(plan)  %></strong> -->
+                  <strong><%= plan.name %></strong>
+                </h3>
+                <span class="lead text-muted"><%= plan.short_desc %></span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-3 text-center">
+          <div class="plans-content">
+            <%= button_to 'Count me in!', plan_plan_subscriptions_path(plan), params: { status: :OK }, class: "btn btn-success btn-md btn-block"  %>
+            <%= button_to 'Decline', plan_plan_subscriptions_path(plan), params: { status: :KO }, class: "btn btn-danger btn-sm btn-block"  %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  <% end %>
+</ul>
+<br>

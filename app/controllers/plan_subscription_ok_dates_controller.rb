@@ -17,7 +17,7 @@ class PlanSubscriptionOkDatesController < ApplicationController
 
   def destroy
     plan_subscription_ok_date = PlanSubscriptionOkDate.destroy(params[:id])
-    redirect_to plan_path(plan_subscription_ok_date.plan_date.plan), notice: 'Date was successfully refused.'
+    redirect_to plan_path(plan_subscription_ok_date.plan_date.plan), notice: 'Date was successfully declined.'
   end
 
 end
