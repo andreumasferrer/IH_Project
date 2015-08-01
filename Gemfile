@@ -52,6 +52,9 @@ group :development, :test do
   gem 'awesome_print'
   gem 'letter_opener'
   gem 'faker', '~> 1.4.3'
+  gem "better_errors"
+  gem "binding_of_caller"
+
 end
 
 group :production do

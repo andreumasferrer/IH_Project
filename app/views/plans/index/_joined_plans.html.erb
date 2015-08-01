@@ -1,0 +1,21 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Joined Plans</h3>
+  </div>
+  <div class="panel-body">
+
+    <ul>
+      <% @plans_ok.each do |plan| %>
+      <li>
+        <strong><%= link_to plan.name, plan_path(plan)  %></strong>
+        -
+        <%= plan.short_desc %>
+
+        <%= button_to 'Refuse', plan_plan_subscription_path(plan,plan.get_subscription(current_user)), method: :patch, params: { status: :KO },
+          data: { confirm: "Are you sure?" }   %>
+
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

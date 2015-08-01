@@ -13,72 +13,85 @@
  *= require_tree .
  *= require_self
  */
- @import "bootstrap-sprockets";
- @import "bootstrap";
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
-
- html {
-   position: relative;
-   min-height: 100%;
- }
- body {
-   /* Margin bottom by footer height */
-   margin-bottom: 40px;
-   background-color: rgb(241,242,245);
- }
-
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 40px;
+  background-color: rgb(241,242,245);
+}
 
 /* ----------------NAVBAR --------------- */
- .app-navbar{
-   margin-bottom: 0;
-   background-color: rgb(236,237,242);
-   color: rgb(95,110,131);
-   border: 1px solid rgb(207,213,218);
-   border-right: 0;
-   border-left: 0;
- }
-
-  .navbar-default .navbar-brand {
-   color: rgb(15,25,39)	; /*Change active text color here*/
-    }
-
- #ribbon {
-    display: block;
-    width: 100%;
-    height: 5px;
-    background: image-url("ribbon.svg") repeat-x top left;
- }
-/* --------------endNAVBAR-------------- */
-
-.group-header{
-  background-color: rgb(95,110,131);
-  color: white;
-  // height: 10em;
+.app-navbar {
+  margin-bottom: 0;
+  background-color: rgb(236,237,242);
+  color: rgb(95,110,131);
+  border: 1px solid rgb(207,213,218);
+  border-right: 0;
+  border-left: 0;
 }
-.group-sub-header{
-  background-color: white;
+.navbar-default .navbar-brand {
+  color: rgb(15,25,39);
+  /*Change active text color here*/
+}
+#ribbon {
+  display: block;
+  width: 100%;
+  height: 5px;
+  background: image-url("ribbon.svg") repeat-x top left;
+}
+/* --------------endNAVBAR-------------- */
+.group-block {
+  background: image-url("GOTAvatar.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+
+  // -webkit-filter: blur(5px);
+  // -moz-filter: blur(5px);
+  // -o-filter: blur(5px);
+  // -ms-filter: blur(5px);
+  // filter: blur(5px);
+}
+
+
+.group-header {
+  // background-color: rgb(95,110,131);
+  color: white;
+
+  // height: 10em;
+  background: linear-gradient(rgba(90,90,90,.5),rgba(199,199,199,.5));
+}
+.group-sub-header {
+  background-color: rgba(250,250,250,.99);
+
   padding-top: 10px;
   padding-bottom: 10px;
   // height: 4em;
+  border-bottom: 1px solid rgb(218,226,233);
 }
-
 .group-avatar {
   position: absolute;
   width: 10em;
   height: 10em;
   margin-top: 1em;
 }
-
- .footer {
-   position: absolute;
-   bottom: 0;
-   width: 100%;
-   /* Set the fixed height of the footer here */
-   height: 30px;
-
-   padding-top: 5px;
-   background-color: white;
-   border: 1px solid #E5EAEE;
-   border-right: 0;
-   border-left: 0;
- }
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  padding-top: 5px;
+  background-color: white;
+  border: 1px solid #e5eaee;
+  border-right: 0;
+  border-left: 0;
+}

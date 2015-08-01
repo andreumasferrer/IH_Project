@@ -1,0 +1,17 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Pending Plans</h3>
+  </div>
+  <div class="panel-body">
+    <ul>
+      <% @plans_not_responded.each do |plan| %>
+      <li>
+        <strong><%= link_to plan.name, plan_path(plan)  %></strong>
+        -
+        <%= button_to 'Refuse', plan_plan_subscriptions_path(plan), params: { status: :KO }  %>
+        <%= button_to 'Join', plan_plan_subscriptions_path(plan), params: { status: :OK }  %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">Refused Plans</h3>
+  </div>
+  <div class="panel-body">
+
+    <ul>
+      <% @plans_ko.each do |plan| %>
+      <li>
+        <strong><%= link_to plan.name, plan_path(plan)  %></strong>
+        -
+        <%= plan.short_desc %>
+        <%= button_to 'Join', plan_plan_subscription_path(plan,plan.get_subscription(current_user)), method: :patch, params: { status: :OK }  %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
