@@ -4,13 +4,37 @@
   </div>
   <div class="panel-body">
 
-    <ul>
+    <ul class="list-unstyled">
       <% @plans_ko.each do |plan| %>
       <li>
-        <strong><%= link_to plan.name, plan_path(plan)  %></strong>
-        -
-        <%= plan.short_desc %>
-        <%= button_to 'Join', plan_plan_subscription_path(plan,plan.get_subscription(current_user)), method: :patch, params: { status: :OK }  %>
+        <div class="container-fluid plan-card plan-card-refused">
+          <div class="row">
+            <div class="col-md-9">
+
+              <div class="media">
+                <a class="pull-left" href="<%=plan_path(plan)%>"</a>
+                  <img alt="Plan image" class="media-object" src="http://lorempixel.com/80/80">
+                </a>
+                <div class="media-body plans-content ">
+
+                  <h3 class="media-heading"><strong><%= link_to plan.name, plan_path(plan)  %></strong></h3>
+
+                  <span class="lead"><%= plan.short_desc %></span>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-3 text-center">
+
+              <div class="plans-content">
+
+                <%= link_to 'Count Me In', plan_plan_subscription_path(plan,plan.get_subscription(current_user)),
+                    method: :patch, params: { status: :OK }, class: "btn btn-success btn-md btn-block"  %>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </li>
       <% end %>
     </ul>

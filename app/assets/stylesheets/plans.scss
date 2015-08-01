@@ -1,3 +1,25 @@
 // Place all the styles related to the plans controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.plan-card{
+  border: 1px solid rgb(207,213,218);
+  margin: .5em 0 .5em 0;
+  background-color: white;
+}
+
+.plan-card-refused{
+  border-left: 5px solid red;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}
+
+.plan-card-refused:hover {
+  -webkit-filter: grayscale(0);
+  filter: grayscale(0);
+}
+
+.plans-content{
+  padding: 0.5em 0 0.5em 0;
+}

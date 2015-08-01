@@ -30,12 +30,12 @@
               <li class="disabled">
                 <a>
                   <span class="badge pull-right">0</span>
-                  Pending &nbsp;
+                  New &nbsp;
                 </a>
               </li>
             <% else %>
               <li>
-                <a href="#pending" data-toggle="tab" id="pending-pill">
+                <a href="#new" data-toggle="tab" id="new-pill">
                   <span class="badge pull-right"><%= @plans_not_responded.count%></span>
                   Pending &nbsp;</a></li>
             <% end %>
@@ -80,14 +80,14 @@
       <div class="tab-content">
         <div class="tab-pane fade in active" id="all">
           <% if @plans_not_responded.count > 0%>
-            <%= render 'plans/index/pending_plans'%>
+            <%= render 'plans/index/new_plans'%>
           <% end %>
           <%= render 'plans/index/joined_plans'%>
           <%= render 'plans/index/refused_plans'%>
         </div>
-        <div class="tab-pane fade" id="pending">
+        <div class="tab-pane fade" id="new">
           <% if @plans_not_responded.count > 0%>
-            <%= render 'plans/index/pending_plans'%>
+            <%= render 'plans/index/new_plans'%>
           <% end %>
         </div>
         <div class="tab-pane fade" id="joined">
