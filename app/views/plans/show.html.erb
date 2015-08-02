@@ -58,10 +58,15 @@
           <%= @plan.short_desc %><em>(<%= @plan.status %>)</em>
         </div>
         <div>
-          <span class="glyphicon glyphicon-calendar"></span>
-          Not decided
-          <span class="glyphicon glyphicon-map-marker"></span>
-          Makers Of Barcelona, Barcelona (Catalunya)
+          <a href="#plan-when" class="text-info">
+            <span class="glyphicon glyphicon-calendar"></span>
+            Date not decided
+          </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="#plan-where" class="text-info">
+            <span class="glyphicon glyphicon-map-marker"></span>
+            Makers Of Barcelona, Barcelona (Catalunya)
+          </a>
         </div>
       </div>
     </div>
@@ -96,15 +101,44 @@
              <%= @plan.long_desc %>
           </p>
       </div>
+      <br>
+      <div id="plan-when">
 
-      <div class="plan-when">
-          <br>
           <h1>WHEN</h1>
       </div>
-
-      <div class="plan-where">
-          <br>
+      <br>
+      <br>
+      <div id="plan-where">
           <h1>WHERE</h1>
+          <br>
+          <div class="containter-flow">
+              <ul>
+                <% @plan.plan_locations.each do |location| %>
+
+                    <div class="row">
+                      <div class="col-md-10">
+                        <li>
+                        <div class="lead">
+                          <strong><%= location.name %></strong>
+                          <p>
+                            <%= location.address %>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <% if current_user && (current_user.id == @plan.user.id)%>
+                          <%= button_to 'Delete', plan_plan_location_path(@plan, location), method: :delete,
+                          data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm "  %>
+                        <% end %>
+                        </li>
+                     </div>
+                   </div>
+
+
+                <% end %>
+              </ul>
+          </div>
+
       </div>
     </div>
     <div class="col-md-3">
@@ -145,19 +179,7 @@
 <%= render 'plans/new_plan_date_form', plan: @plan, plan_date: @plan_date%>
 
 <br>
-<h4>Locations</h4>
-<ul>
-  <% @plan.plan_locations.each do |location| %>
-  <li>
-    name: <%= location.name %>
-    <!-- description: <%= location.description %> -->
-    address: <%= location.address %>
-    <% if current_user && (current_user.id == @plan.user.id)%>
-      <%= button_to 'Delete', plan_plan_location_path(@plan, location), method: :delete, data: { confirm: "Are you sure?" }  %>
-    <% end %>
-  </li>
-  <% end %>
-</ul>
+
 <h5>Add new location</h5>
 <%= render 'plans/new_plan_location_form', plan: @plan, plan_location: @plan_location%>
 

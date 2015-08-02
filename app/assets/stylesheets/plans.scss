@@ -128,3 +128,17 @@
 .plan-image{
   width: 100%;
 }
+
+#plan-where ul {
+  list-style-type: none;
+}
+#plan-where li:before {
+
+    /*Using a Bootstrap glyphicon as the bullet point*/
+    content: "\e062";
+    font-family: 'Glyphicons Halflings';
+    font-size: 1.5em;
+    float: left;
+    margin-top: 2px;
+    margin-left: -1.5em;
+}
