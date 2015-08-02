@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-3 text-center">
           <div class="plans-content">
-            <%= button_to 'Count Me In', plan_plan_subscription_path(plan,plan.get_subscription(current_user)),
+            <%= button_to 'Join', plan_plan_subscription_path(plan,plan.get_subscription(current_user)),
                     method: :patch, params: { status: :OK }, class: "btn btn-success btn-md btn-block"  %>
           </div>
         </div>

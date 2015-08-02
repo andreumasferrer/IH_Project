@@ -3,6 +3,54 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+
+.group-block {
+  background: image-url("GRPAvatar.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+
+  // -webkit-filter: blur(5px);
+  // -moz-filter: blur(5px);
+  // -o-filter: blur(5px);
+  // -ms-filter: blur(5px);
+  // filter: blur(5px);
+}
+
+
+.group-header {
+  color: white;
+  height: 17em;
+  background: linear-gradient(rgba(90,90,90,.5),rgba(199,199,199,.5));
+}
+
+#group-info {
+  margin-top: 8em;
+}
+
+
+.group-sub-header {
+  background-color: rgba(250,250,250,.99);
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  // height: 4em;
+  border-bottom: 1px solid rgb(218,226,233);
+}
+
+.group-name{
+  //
+}
+.group-avatar {
+  position: relative;
+  min-width: 12em;
+  min-height: 12em;
+  margin-top: 4.4em;
+}
+
+
 .plan-card{
   border: 1px solid rgb(207,213,218);
   margin: .5em 0 .5em 0;
@@ -56,4 +104,27 @@
 
 .plans-content .user-plan-status{
   font-size: 3em;
+}
+
+
+.plan-header{
+  margin-top: 3.7em;
+}
+
+#plan-subheader{
+  margin-top: 0px;
+}
+
+#plan-subheader .plans-content{
+  margin-top: 3em;
+}
+.plan-admin-btn, .plan-group-btn{
+  margin-top: 0.5em;
+}
+.plan-name {
+  font-size: 4em;
+}
+
+.plan-image{
+  width: 100%;
 }

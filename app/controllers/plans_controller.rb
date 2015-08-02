@@ -10,6 +10,7 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id]) || (render 'layouts/404')
+    @plan_subscription = PlanSubscription.find_by(user: current_user, plan: @plan)
     @plan_date = PlanDate.new
     @plan_location = PlanLocation.new
     @users_joining = @plan.users_joining

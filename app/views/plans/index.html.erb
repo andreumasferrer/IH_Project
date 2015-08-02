@@ -1,16 +1,17 @@
 
+
 <div class="group-block">
   <div class="group-header">
     <div class="container">
       <div class="row">
-        <div class="col-md-2">
-          <img src="<%= image_url("GRPAvatar.jpg") %>" alt="Group Image" class="img-thumbnail group-avatar hidden-xs hidden-sm">
-        </div>
-        <div class="col-md-10 ">
-          <h1>Deadly Viper Assassination Squad</h1>
+        <div id="group-info" class="col-md-10">
+          <h1 class="group-name">Deadly Viper Assassination Squad</h1>
           <div class="lead">
             <%= @members.count%> members
           </div>
+        </div>
+        <div class="col-md-2">
+          <img src="<%= image_url("GRPAvatar.jpg") %>" alt="Group Image" class="pull-right img-thumbnail img-circle group-avatar hidden-xs hidden-sm">
         </div>
       </div>
     </div>
@@ -18,7 +19,10 @@
   <div class="group-sub-header">
     <div class="container">
       <div class="row">
-        <div class="col-md-9 col-md-offset-2">
+        <div class="col-md-3 col-md-push-9">
+          <%= link_to('Create New Plan', new_plan_path, class: 'btn btn-info btn-block')  %>
+        </div>
+        <div class="col-md-9 col-md-pull-3">
           <ul class="nav nav-pills " role="tablist" id="myTab">
             <li class="active">
               <a href="#all" data-toggle="tab" id="all-pill">
@@ -49,9 +53,6 @@
               Declined &nbsp;</a></li>
           </ul>
         </div>
-        <div class="col-md-1">
-          <%= link_to('New Plan', new_plan_path, class: 'btn btn-success pull-right')  %>
-        </div>
       </div>
     </div>
   </div>
@@ -60,20 +61,9 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-2">
-      <h2>Members</h2>
-      <ul>
-        <% @members.each do |member| %>
-        <li>
-          <small><%= member.email %></small>
-        </li>
-        <% end %>
-      </ul>
-    </div>
-    <div class="col-md-10">
+
+    <div class="col-md-9">
       <div class="tab-content">
-
-
 
       </div>
 
@@ -102,6 +92,16 @@
         </div>
       </div>
 
+    </div>
+    <div class="col-md-3">
+      <p class="lead">Group members</p>
+      <ul>
+        <% @members.each do |member| %>
+        <li>
+          <small><%= member.email %></small>
+        </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </div>

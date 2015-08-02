@@ -1,39 +1,122 @@
-<h1><%= @plan.name %>
-<small>
-  <%= @plan.short_desc %><em>(<%= @plan.status %>)</em>
-</small>
-</h1>
-<%= link_to "Back to group", plans_path %>
-<% plan_subscription = PlanSubscription.find_by(user: current_user, plan: @plan) %>
-<% if plan_subscription  %>
-  <% if plan_subscription.status == 'OK' %>
-    <%= button_to 'Dismiss', plan_plan_subscription_path(@plan,plan_subscription), method: :patch, params: { status: :KO },
-      data: { confirm: "Are you sure?" }  %>
-  <% else %>
-    <%= button_to 'Join', plan_plan_subscription_path(@plan,plan_subscription), method: :patch, params: { status: :OK }  %>
-  <% end %>
-<% else %>
-  <%= button_to 'Dismiss', plan_plan_subscriptions_path(@plan), params: { status: :KO }  %>
-  <%= button_to 'Join', plan_plan_subscriptions_path(@plan), params: { status: :OK }  %>
-<% end %>
 
-<% if current_user && (current_user.id == @plan.user.id)%>
-  <%= link_to "Edit plan", edit_plan_path(@plan) %>
-  <%= link_to "Delete plan", plan_path(@plan), method: :delete, data: { confirm: "Are you sure?" } %>
-  <% if ['ACCEPTED','PLANNING'].include? @plan.status %>
-    <%= button_to 'Cancel plan', plan_path(@plan), method: :patch, params: { 'plan[status]': :CANCELED }  %>
-  <% end %>
-  <% if ['CANCELED','PLANNING'].include? @plan.status %>
-    <%= button_to 'Accept plan', plan_path(@plan), method: :patch, params: { 'plan[status]': :ACCEPTED}  %>
-  <% end %>
-  <% if ['CANCELED','ACCEPTED'].include? @plan.status %>
-    <%= button_to 'Planning', plan_path(@plan), method: :patch, params: { 'plan[status]': :PLANNING}  %>
-  <% end %>
-<% end %>
 
-<p>
-  Full details: <%= @plan.long_desc %>
-</p>
+<div class="container-fluid">
+  <div class="row plan-header">
+    <div class="col-md-10 ">
+      <a href="<%=plans_path%>" class="btn btn-info plan-group-btn">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <strong>Back to: </strong><small><em>Deadly Viper Assassination Squad</em></small>
+      </a>
+    </div>
+    <div class="col-md-2 ">
+      <% if current_user && (current_user.id == @plan.user.id)%>
+        <div class="dropdown plan-admin-btn">
+          <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+            Admin plan
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation">
+              <%= link_to "Edit plan", edit_plan_path(@plan), tabindex: "-1",
+                  role: "menuitem"  %>
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation" class="dropdown-header text-muted">CHANGE STATUS</li>
+            <li role="presentation" class="<%='disabled' unless @plan.status != 'ACCEPTED'%>">
+              <%= link_to "Confirm", plan_path(@plan, plan: {status: :ACCEPTED}), method: :patch %>
+            </li>
+            <li role="presentation" class="<%='disabled' unless @plan.status != 'PLANNING'%>">
+              <%= link_to "Reopen", plan_path(@plan, plan: {status: :PLANNING}), method: :patch %>
+            </li>
+            <li role="presentation" class="<%='disabled' unless @plan.status != 'CANCELED'%>">
+              <!-- <a role="menuitem" tabindex="-1" href="#">Cancel</a> -->
+              <%= link_to "Cancel", plan_path(@plan, plan: {status: :CANCELED}), method: :patch %>
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation">
+              <%= link_to "Delete plan", plan_path(@plan), method: :delete,
+                  data: { confirm: "Are you sure?" }, tabindex: "-1",
+                  role: "menuitem" %>
+            </li>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="container">
+  <div id="plan-subheader" class="row page-header">
+      <div class="col-md-10 ">
+      <div class="plan-info">
+        <h1 class="plan-name"><strong><%= @plan.name %></strong></h1>
+        <div class="plan-description lead text-muted ">
+          <%= @plan.short_desc %><em>(<%= @plan.status %>)</em>
+        </div>
+        <div>
+          <span class="glyphicon glyphicon-calendar"></span>
+          Not decided
+          <span class="glyphicon glyphicon-map-marker"></span>
+          Makers Of Barcelona, Barcelona (Catalunya)
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="plans-content">
+        <% if @plan_subscription  %>
+          <% if @plan_subscription.status == 'OK' %>
+            <span class="glyphicon glyphicon-ok-sign user-plan-status"></span>
+            <div>
+                <%= button_to 'Decline', plan_plan_subscription_path(@plan,@plan.get_subscription(current_user)), method: :patch, params: { status: :KO },
+                  data: { confirm: "Are you sure?" }  , class: "btn btn-xs btn-danger"  %>
+            </div>
+          <% else %>
+            <%= button_to 'Join', plan_plan_subscription_path(@plan,@plan.get_subscription(current_user)),
+                  method: :patch, params: { status: :OK }, class: "btn btn-success btn-md btn-block"  %>
+
+          <% end %>
+        <% else %>
+          <%= button_to 'Count Me In!', plan_plan_subscriptions_path(@plan), params: { status: :OK }, class: "btn btn-success btn-md btn-block"  %>
+          <%= button_to 'Decline', plan_plan_subscriptions_path(@plan), params: { status: :KO }, class: "btn btn-danger btn-sm btn-block"  %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9">
+
+      <div class="plan-what">
+          <img src="http://lorempixel.com/600/300" alt="test" class="plan-image"/>
+          <br><br>
+          <p class="lead">
+             <%= @plan.long_desc %>
+          </p>
+      </div>
+
+      <div class="plan-when">
+          <br>
+          <h1>WHEN</h1>
+      </div>
+
+      <div class="plan-where">
+          <br>
+          <h1>WHERE</h1>
+      </div>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
 
 <h4>Dates</h4>
 <ul>
@@ -42,14 +125,14 @@
     start_date: <%= date.start_date %>
     end_date: <%= date.end_date %>
     All_day?: <%= date.all_day %>
-    <% if plan_subscription %>
+    <% if @plan_subscription %>
       <% if date.accepted_by_user?(current_user) %>
         Accepted
         <% plan_subscription_ok_date = date.get_subscription_ok_date(current_user) %>
         <%= button_to 'Decline', plan_subscription_ok_date_path(plan_subscription_ok_date), method: :delete %>
       <% else %>
         Not accepted yet <%= button_to 'Accept', plan_subscription_ok_dates_path,
-                                        params: {plan_subscription_id: plan_subscription.id, plan_date_id: date.id} %>
+                                        params: {plan_subscription_id: @plan_subscription.id, plan_date_id: date.id} %>
       <% end %>
     <% end %>
     <% if current_user && (current_user.id == @plan.user.id)%>
@@ -103,3 +186,7 @@
   </li>
   <% end %>
 </ul>
+
+<small class="text-muted ">Status:<span><%= @plan.status %></span></small>
+<br>
+<br>
