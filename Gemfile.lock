@@ -49,7 +49,7 @@ GEM
     aws-sdk-resources (2.1.11)
       aws-sdk-core (= 2.1.11)
     bcrypt (3.1.10)
-    better_errors (2.0.0)
+    better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
