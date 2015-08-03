@@ -1,4 +1,4 @@
-<%= form_for(plan) do |f| %>
+<%= form_for(plan, html: {multipart: true} ) do |f| %>
 
 <%= render 'layouts/errors', model: plan %>
 
@@ -15,6 +15,11 @@
 <div class="field">
 	<%=f.label :long_desc %>
   <%=f.text_area :long_desc %>
+</div>
+
+<div class="field">
+	<%=f.label :main_image %>
+  <%=f.file_field :main_image %>
 </div>
 
 <div class="actions">

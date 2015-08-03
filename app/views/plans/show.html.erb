@@ -98,8 +98,8 @@
     <div class="col-md-9">
 
       <div class="plan-what">
-          <img src="http://lorempixel.com/600/300" alt="test" class="plan-image"/>
-          <br><br>
+          <%= image_tag(@plan.main_image.url, class: "plan-image") if @plan.main_image.present? %>
+
           <p class="lead">
              <%= @plan.long_desc %>
           </p>

@@ -7,9 +7,11 @@
         <div class="col-md-10">
           <a href="<%=plan_path(plan)%>">
           <div class="media">
-            <!-- <a class="pull-left" href="<%=plan_path(plan)%>"> -->
-              <img alt="Plan image" class="media-object pull-left" src="http://lorempixel.com/80/80">
-            <!-- </a> -->
+            <% if plan.main_image.present? %>
+              <%= image_tag(plan.main_image.url(:thumb), class: "media-object pull-left plan-image-thumb") %>
+            <% else %>
+              <%= image_tag("thumb/missing_plan.png", class: "media-object pull-left plan-image-thumb") %>
+            <% end %>
             <div class="media-body plans-content ">
               <h3 class="media-heading">
                 <!-- <strong><%= link_to plan.name, plan_path(plan)  %></strong> -->

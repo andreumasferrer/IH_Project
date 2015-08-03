@@ -70,6 +70,10 @@
   text-decoration: none;
 }
 
+.plan-card .plan-image-thumb{
+  height: 80px;
+  width: 90px;
+}
 
 .plan-card-new{
   border-left: 5px solid rgb(82,176,214);
@@ -127,6 +131,7 @@
 
 .plan-image{
   width: 100%;
+  margin-bottom: 2em;
 }
 
 #plan-when h1,

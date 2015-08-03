@@ -5,6 +5,11 @@ class Plan < ActiveRecord::Base
   has_many :plan_subscriptions, dependent: :destroy
   has_many :subscribers, source: :user, through: :plan_subscriptions
 
+
+  has_attached_file :main_image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing_plan.png"
+  validates_attachment_content_type :main_image, :content_type => /\Aimage\/.*\Z/
+
+
   STATUSES = %w(PLANNING ACCEPTED CANCELED)
 
   validates :name, :user, presence: true

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803162443) do
+ActiveRecord::Schema.define(version: 20150803183515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,16 +55,19 @@ ActiveRecord::Schema.define(version: 20150803162443) do
   add_index "plan_subscriptions", ["plan_id", "user_id"], name: "index_plan_subscriptions_on_plan_id_and_user_id", unique: true, using: :btree
 
   create_table "plans", force: :cascade do |t|
-    t.string   "name",                           null: false
+    t.string   "name",                                    null: false
     t.string   "short_desc"
     t.text     "long_desc"
-    t.string   "image_url"
-    t.boolean  "open_dates",     default: false, null: false
-    t.boolean  "open_locations", default: false, null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.boolean  "open_dates",              default: false, null: false
+    t.boolean  "open_locations",          default: false, null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.integer  "user_id"
-    t.string   "status",                         null: false
+    t.string   "status",                                  null: false
+    t.string   "main_image_file_name"
+    t.string   "main_image_content_type"
+    t.integer  "main_image_file_size"
+    t.datetime "main_image_updated_at"
   end
 
   create_table "users", force: :cascade do |t|
