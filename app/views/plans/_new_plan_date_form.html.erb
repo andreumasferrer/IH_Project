@@ -1,26 +1,46 @@
-<%= form_for([plan,plan_date]) do |f| %>
+<div class="modal fade" id="new-date-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title">New date proposal</h3>
+      </div>
 
-  <%= render 'layouts/errors', model: plan_date %>
+        <%= form_for([plan,plan_date], :html => {class: 'form-horizontal'}) do |f| %>
+          <div class="modal-body">
+          <%= render 'layouts/errors', model: plan_date %>
 
-  <input type="hidden" name="plan_id" value="<%=plan.id%>">
+          <input type="hidden" name="plan_id" value="<%=plan.id%>">
 
-  <div class="field">
-    <%= f.label :start_date %>
-    <%= f.date_field :start_date %>
-  </div>
+          <div class="form-group">
+            <%= f.label :start_date, "Start date", class: "col-sm-2 control-label" %>
+            <div class="col-sm-5">
+              <%= f.date_field :start_date, class: "form-control"  %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :end_date, "End date", class: "col-sm-2 control-label" %>
+            <div class="col-sm-5">
+              <%= f.date_field :end_date, class: "form-control"  %>
+            </div>
+          </div>
 
-  <div class="field">
-    <%= f.label :end_date %>
-    <%= f.date_field :end_date %>
-  </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="checkbox">
+                <label>
+                  <%= f.check_box :all_day, checked: true %> All day
+                </label>
+              </div>
+            </div>
+          </div>
 
-  <div class="field">
-    <%= f.label :all_day %>
-    <%= f.check_box :all_day %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-
-<% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add date</button>
+          </div>
+      <% end %>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

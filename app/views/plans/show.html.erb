@@ -1,3 +1,6 @@
+<%= render 'plans/new_plan_date_form', plan: @plan, plan_date: @plan_date%>
+<%= render 'plans/new_plan_location_form', plan: @plan, plan_location: @plan_location%>
+
 
 
 <div class="container-fluid">
@@ -109,7 +112,9 @@
               <h1>WHEN</h1>
             </div>
             <div class="col-md-2">
-              <button type="button" name="button" class=" btn btn-info  pull-right">Add date</button>
+              <button type="button" name="button" class=" btn btn-info  pull-right" data-toggle="modal" data-target="#new-date-modal">
+                Add date
+              </button>
             </div>
           </div>
         </div>
@@ -163,7 +168,9 @@
                 <h1>WHERE</h1>
               </div>
               <div class="col-md-2">
-                <button type="button" name="button" class=" btn btn-info  pull-right">Add location</button>
+                <button type="button" name="button" class=" btn btn-info  pull-right" data-toggle="modal" data-target="#new-location-modal">
+                  Add location
+                </button>
               </div>
             </div>
           </div>
@@ -235,13 +242,9 @@
 
 
 
-<h5>Add new date</h5>
-<%= render 'plans/new_plan_date_form', plan: @plan, plan_date: @plan_date%>
 
 <br>
 
-<h5>Add new location</h5>
-<%= render 'plans/new_plan_location_form', plan: @plan, plan_location: @plan_location%>
 
 
 

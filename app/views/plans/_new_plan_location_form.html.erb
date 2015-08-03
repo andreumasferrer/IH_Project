@@ -1,26 +1,42 @@
-<%= form_for([plan,plan_location]) do |f| %>
+<div class="modal fade" id="new-location-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title">New location</h3>
+      </div>
 
-  <%= render 'layouts/errors', model: plan_location %>
+        <%= form_for([plan,plan_location], :html => {class: 'form-horizontal'}) do |f| %>
+          <div class="modal-body">
+            <%= render 'layouts/errors', model: plan_location %>
 
-  <input type="hidden" name="plan_id" value="<%=plan.id%>">
+            <input type="hidden" name="plan_id" value="<%=plan.id%>">
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+            <div class="form-group">
+              <%= f.label :name, "Name", class: "col-sm-2 control-label"  %>
+              <div class="col-sm-10">
+                <%= f.text_field :name, class: "form-control"  %>
+              </div>
+            </div>
 
-  <!-- <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </div> -->
+            <!-- <div class="field">
+              <%= f.label :description %>
+              <%= f.text_field :description %>
+            </div> -->
 
-  <div class="field">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
-  </div>
+            <div class="form-group">
+              <%= f.label :address, "Address", class: "col-sm-2 control-label" %>
+              <div class="col-sm-10">
+                <%= f.text_field :address, class: "form-control"  %>
+              </div>
+            </div>
+          </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-
-<% end %>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Add location</button>
+          </div>
+      <% end %>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
