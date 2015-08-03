@@ -37,7 +37,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Project specific gems
 gem 'devise'
 gem 'figaro'
-gem "paperclip", "~> 4.3"
+gem "paperclip"
 gem 'aws-sdk'
 
 group :development, :test do
