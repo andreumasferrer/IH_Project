@@ -103,13 +103,70 @@
       </div>
       <br>
       <div id="plan-when">
+        <div class="containter">
+          <div class="row page-header">
+            <div class="col-md-10">
+              <h1>WHEN</h1>
+            </div>
+            <div class="col-md-2">
+              <button type="button" name="button" class=" btn btn-info  pull-right">Add date</button>
+            </div>
+          </div>
+        </div>
+          <div class="containter-flow">
+              <ul>
+                <% @plan.plan_dates.each do |date| %>
 
-          <h1>WHEN</h1>
+                    <div class="row">
+                      <div class="col-md-10">
+                        <li>
+                        <div class="lead">
+                          <strong><%= date.start_date.strftime('%a, %e %b %Y') %>
+                            <%= date.end_date.strftime(' - %a, %e %b %Y') unless date.end_date.nil? %>
+                          </strong>
+                          <p>
+                            <%= if (date.all_day && date.end_date.nil? ) then "All day" end %>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <% if @plan_subscription %>
+                          <% if date.accepted_by_user?(current_user) %>
+                            <small class="text-muted">Accepted</small>
+                            <% plan_subscription_ok_date = date.get_subscription_ok_date(current_user) %>
+                            <%= button_to 'Decline', plan_subscription_ok_date_path(plan_subscription_ok_date),
+                                method: :delete,  class: "btn btn-warning btn-sm pull-right"%>
+                          <% else %>
+                            <small class="text-muted">Not accepted</small>
+                            <%= button_to 'Accept', plan_subscription_ok_dates_path,
+                                params: {plan_subscription_id: @plan_subscription.id,
+                                plan_date_id: date.id}, class: "btn btn-success btn-sm pull-right" %>
+                          <% end %>
+                        <% end %>
+                        <% if current_user && (current_user.id == @plan.user.id)%>
+                          <%= button_to 'Delete', plan_plan_date_path(@plan, date), method: :delete,
+                          data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-xs pull-right "  %>
+                        <% end %>
+
+                        </li>
+                     </div>
+                   </div>
+                <% end %>
+              </ul>
+          </div>
       </div>
       <br>
-      <br>
       <div id="plan-where">
-          <h1>WHERE</h1>
+          <div class="containter">
+            <div class="row page-header">
+              <div class="col-md-10">
+                <h1>WHERE</h1>
+              </div>
+              <div class="col-md-2">
+                <button type="button" name="button" class=" btn btn-info  pull-right">Add location</button>
+              </div>
+            </div>
+          </div>
           <br>
           <div class="containter-flow">
               <ul>
@@ -128,7 +185,7 @@
                       <div class="col-md-2">
                         <% if current_user && (current_user.id == @plan.user.id)%>
                           <%= button_to 'Delete', plan_plan_location_path(@plan, location), method: :delete,
-                          data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm "  %>
+                          data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm pull-right"  %>
                         <% end %>
                         </li>
                      </div>
@@ -141,8 +198,35 @@
 
       </div>
     </div>
+
     <div class="col-md-3">
 
+      <p class="lead">ATTENDING</p>
+      <ul>
+        <% @users_joining.each do |user| %>
+        <li>
+          <%= user.email %>
+        </li>
+        <% end %>
+      </ul>
+      <p class="lead">NOT RESPONDED YET</p>
+      <!-- <h3>NOT RESPONDED YET</h3> -->
+      <ul>
+        <% @users_not_responding.each do |user| %>
+        <li>
+          <%= user.email %>
+        </li>
+        <% end %>
+      </ul>
+      <p class="lead">DECLINING</p>
+      <!-- <h3>DECLINING</h3> -->
+      <ul>
+        <% @users_dismissing.each do |user| %>
+        <li>
+          <%= user.email %>
+        </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 
@@ -151,30 +235,6 @@
 
 
 
-
-<h4>Dates</h4>
-<ul>
-  <% @plan.plan_dates.each do |date| %>
-  <li>
-    start_date: <%= date.start_date %>
-    end_date: <%= date.end_date %>
-    All_day?: <%= date.all_day %>
-    <% if @plan_subscription %>
-      <% if date.accepted_by_user?(current_user) %>
-        Accepted
-        <% plan_subscription_ok_date = date.get_subscription_ok_date(current_user) %>
-        <%= button_to 'Decline', plan_subscription_ok_date_path(plan_subscription_ok_date), method: :delete %>
-      <% else %>
-        Not accepted yet <%= button_to 'Accept', plan_subscription_ok_dates_path,
-                                        params: {plan_subscription_id: @plan_subscription.id, plan_date_id: date.id} %>
-      <% end %>
-    <% end %>
-    <% if current_user && (current_user.id == @plan.user.id)%>
-      <%= button_to 'Delete', plan_plan_date_path(@plan, date), method: :delete, data: { confirm: "Are you sure?" }  %>
-    <% end %>
-  </li>
-  <% end %>
-</ul>
 <h5>Add new date</h5>
 <%= render 'plans/new_plan_date_form', plan: @plan, plan_date: @plan_date%>
 
@@ -183,31 +243,7 @@
 <h5>Add new location</h5>
 <%= render 'plans/new_plan_location_form', plan: @plan, plan_location: @plan_location%>
 
-<h4>Users</h4>
-<h5>Users joining</h5>
-<ul>
-  <% @users_joining.each do |user| %>
-  <li>
-    <%= user.email %>
-  </li>
-  <% end %>
-</ul>
-<h5>Users not responding</h5>
-<ul>
-  <% @users_not_responding.each do |user| %>
-  <li>
-    <%= user.email %>
-  </li>
-  <% end %>
-</ul>
-<h5>Users dismissing</h5>
-<ul>
-  <% @users_dismissing.each do |user| %>
-  <li>
-    <%= user.email %>
-  </li>
-  <% end %>
-</ul>
+
 
 <small class="text-muted ">Status:<span><%= @plan.status %></span></small>
 <br>

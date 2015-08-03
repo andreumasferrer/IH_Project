@@ -129,16 +129,28 @@
   width: 100%;
 }
 
-#plan-where ul {
+#plan-when h1,
+#plan-where h1  {
+  margin-top: 0px;
+}
+
+#plan-when ul,
+#plan-where ul  {
   list-style-type: none;
 }
+#plan-when li:before,
 #plan-where li:before {
-
     /*Using a Bootstrap glyphicon as the bullet point*/
-    content: "\e062";
     font-family: 'Glyphicons Halflings';
     font-size: 1.5em;
     float: left;
     margin-top: 2px;
     margin-left: -1.5em;
+}
+
+#plan-when li:before, {
+  content: "\e109";
+}
+#plan-where li:before, {
+  content: "\e062";
 }
