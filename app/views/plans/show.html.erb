@@ -212,7 +212,7 @@
       <ul>
         <% @users_joining.each do |user| %>
         <li>
-          <%= user.email %>
+          <%= user.show_name %>
         </li>
         <% end %>
       </ul>
@@ -221,7 +221,7 @@
       <ul>
         <% @users_not_responding.each do |user| %>
         <li>
-          <%= user.email %>
+          <%= user.show_name %>
         </li>
         <% end %>
       </ul>
@@ -230,7 +230,7 @@
       <ul>
         <% @users_dismissing.each do |user| %>
         <li>
-          <%= user.email %>
+          <%= user.show_name %>
         </li>
         <% end %>
       </ul>
