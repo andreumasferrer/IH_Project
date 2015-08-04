@@ -56,10 +56,14 @@
   <div id="plan-subheader" class="row page-header">
       <div class="col-md-10 ">
       <div class="plan-info">
+        <div class="pull-right">
+          <%= render 'plans/plan_status_svg', plan: @plan%>
+        </div>
         <h1 class="plan-name"><strong><%= @plan.name %></strong></h1>
         <div class="plan-description lead text-muted ">
-          <%= @plan.short_desc %><em>(<%= @plan.status %>)</em>
+          <%= @plan.short_desc %>
         </div>
+
         <div>
           <a href="#plan-when" class="text-info">
             <span class="glyphicon glyphicon-calendar"></span>
@@ -239,15 +243,6 @@
 
 </div>
 
-
-
-
-
 <br>
-
-
-
-
-<small class="text-muted ">Status:<span><%= @plan.status %></span></small>
 <br>
 <br>

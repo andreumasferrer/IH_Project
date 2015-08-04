@@ -129,6 +129,19 @@
   font-size: 4em;
 }
 
+.plan-status-svg{
+  position:absolute;
+  right: 1em;
+  max-width: 15em;
+  margin: 2em 2em 0 0;
+}
+.plan-card-status-container img {
+  position:absolute;
+  right: 1em;
+  max-width: 12em;
+  margin: 0;
+}
+
 .plan-image{
   width: 100%;
   margin-bottom: 2em;

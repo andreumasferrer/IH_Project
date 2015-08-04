@@ -4,7 +4,7 @@
   <li>
     <div class="container-fluid plan-card plan-card-new">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-10">
           <a href="<%=plan_path(plan)%>">
             <div class="media">
               <% if plan.main_image.present? %>
@@ -13,6 +13,9 @@
                 <%= image_tag("thumb/missing_plan.png", class: "media-object pull-left plan-image-thumb") %>
               <% end %>
               <div class="media-body plans-content ">
+                <div class="plan-card-status-container pull-right">
+                  <%= render 'plans/plan_status_svg', plan: plan%>
+                </div>
                 <h3 class="media-heading">
 <!-- <strong><%= link_to plan.name, plan_path(plan)  %></strong> -->
                   <strong><%= plan.name %></strong>
@@ -22,7 +25,8 @@
             </div>
           </a>
         </div>
-        <div class="col-md-3 text-center">
+        <div class="col-md-2 text-center">
+
           <div class="plans-content">
             <%= button_to 'Count Me In!', plan_plan_subscriptions_path(plan), params: { status: :OK }, class: "btn btn-success btn-md btn-block"  %>
             <%= button_to 'Decline', plan_plan_subscriptions_path(plan), params: { status: :KO }, class: "btn btn-danger btn-sm btn-block"  %>

@@ -3,7 +3,7 @@
   <li>
     <div class="container-fluid plan-card plan-card-refused">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-10">
           <a href="<%=plan_path(plan)%>">
             <div class="media">
 <!-- <a class="pull-left" href="<%=plan_path(plan)%>"> -->
@@ -16,6 +16,9 @@
                 <!-- <img alt="Plan image" class="media-object pull-left" src="http://lorempixel.com/80/80"> -->
               <% end %>
               <div class="media-body plans-content ">
+                <div class="plan-card-status-container pull-right">
+                  <%= render 'plans/plan_status_svg', plan: plan%>
+                </div>
                 <h3 class="media-heading">
 <!-- <strong><%= link_to plan.name, plan_path(plan)  %></strong> -->
                   <strong><%= plan.name %></strong>
@@ -25,7 +28,7 @@
             </div>
           </a>
         </div>
-        <div class="col-md-3 text-center">
+        <div class="col-md-2 text-center">
           <div class="plans-content">
             <%= button_to 'Join', plan_plan_subscription_path(plan,plan.get_subscription(current_user)),
                     method: :patch, params: { status: :OK }, class: "btn btn-success btn-md btn-block"  %>

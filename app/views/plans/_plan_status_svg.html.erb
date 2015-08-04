@@ -1,0 +1,5 @@
+<% if plan.status == 'ACCEPTED' %>
+  <%= image_tag("plans/plan-confirmed.svg", class: "plan-status-svg") %>
+<% elsif plan.status == 'CANCELED' %>
+  <%= image_tag("plans/plan-cancelled.svg", class: "plan-status-svg") %>
+<% end %>
