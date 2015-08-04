@@ -120,7 +120,7 @@
         </div>
           <div class="containter-flow">
               <ul>
-                <% @plan.plan_dates.each do |date| %>
+                <% @plan.plan_dates.order(:start_date, :end_date).each do |date| %>
 
                     <div class="row">
                       <div class="col-md-10">
@@ -177,7 +177,7 @@
           <br>
           <div class="containter-flow">
               <ul>
-                <% @plan.plan_locations.each do |location| %>
+                <% @plan.plan_locations.order(:name).each do |location| %>
 
                     <div class="row">
                       <div class="col-md-10">

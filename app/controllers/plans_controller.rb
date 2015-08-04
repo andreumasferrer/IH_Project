@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   def index
-    @members = User.all # TO DO: Change when group model is added
+    @members = User.all.order(:first_name, :email) # TO DO: Change when group model is added
     subscriptons_ok = current_user.plan_subscriptions.where(status: 'OK')
     @plans_ok = subscriptons_ok.map{|subs| subs.plan}
     subscriptons_ko = current_user.plan_subscriptions.where(status: 'KO')
