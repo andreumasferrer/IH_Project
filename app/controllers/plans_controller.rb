@@ -34,7 +34,7 @@ class PlansController < ApplicationController
     @plan.status = :PLANNING
 
     if @plan.save
-      redirect_to plan_path(@plan), notice: 'Plan was successfully created.'
+      redirect_to plan_path(@plan) #, notice: 'Plan was successfully created.'
     else
       flash[:alert] = "Can't create plan"
       render :new
@@ -50,7 +50,7 @@ class PlansController < ApplicationController
     @plan.update(plan_params)
 
     if @plan.save
-      redirect_to plan_path(@plan), notice: 'Plan was successfully updated.'
+      redirect_to plan_path(@plan) #, notice: 'Plan was successfully updated.'
     else
       flash[:alert] = "Can't update plan"
       render :edit
@@ -59,7 +59,7 @@ class PlansController < ApplicationController
 
   def destroy
     Plan.destroy(params[:id])
-    redirect_to plans_path, notice: 'Plan was successfully deleted.'
+    redirect_to plans_path #, notice: 'Plan was successfully deleted.'
   end
 
   private

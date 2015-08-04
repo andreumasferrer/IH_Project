@@ -7,7 +7,7 @@ class PlanSubscriptionsController < ApplicationController
 
     if @plan_subscription.save
       if params[:status] == 'OK'
-        flash[:notice] = "You joined the plan: #{@plan.name}"
+        # flash[:notice] = "You joined the plan: #{@plan.name}"
       else
         flash[:notice] = "You dismissed the plan: #{@plan.name}"
       end
@@ -25,7 +25,7 @@ class PlanSubscriptionsController < ApplicationController
 
     if @plan_subscription.save
       if params[:status] == 'OK'
-        flash[:notice] = "You joined the plan: #{@plan_subscription.plan.name}"
+        # flash[:notice] = "You joined the plan: #{@plan_subscription.plan.name}"
       else
         flash[:notice] = "You dismissed the plan: #{@plan_subscription.plan.name}"
       end

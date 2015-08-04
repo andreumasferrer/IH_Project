@@ -8,7 +8,7 @@ class PlanDatesController < ApplicationController
     @plan_date = @plan.plan_dates.new(plan_date_params)
 
     if @plan_date.save
-      redirect_to plan_path(@plan), notice: 'Your date was successfully created.'
+      redirect_to plan_path(@plan) #, notice: 'Your date was successfully created.'
     else
       flash[:alert] = "Can't create date proposal"
       render 'plans/show'
@@ -17,7 +17,7 @@ class PlanDatesController < ApplicationController
 
   def destroy
     plan_date = PlanDate.destroy(params[:id])
-    redirect_to plan_path(plan_date.plan), notice: 'Date was successfully deleted.'
+    redirect_to plan_path(plan_date.plan)#, notice: 'Date was successfully deleted.'
   end
 
   private

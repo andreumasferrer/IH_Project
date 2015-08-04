@@ -8,7 +8,7 @@ class PlanSubscriptionOkDatesController < ApplicationController
     @plan_subscription_ok_date.order = 0 # TO DO: Mantain order of accepted dates
 
     if @plan_subscription_ok_date.save
-      flash[:notice] = 'The date has been accepted'
+      # flash[:notice] = 'The date has been accepted'
     else
       flash[:alert] = "Can't accept date"
     end
