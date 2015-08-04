@@ -67,12 +67,28 @@
         <div>
           <a href="#plan-when" class="text-info">
             <span class="glyphicon glyphicon-calendar"></span>
-            Date not decided
+            <% if @plan.plan_dates.count == 0 %>
+              No dates yet
+            <% elsif @best_date.present? %>
+              <%=@best_date.start_date.strftime('%A, %e %B %Y')%>
+              <% if @plan.status != 'ACCEPTED' %>
+                <em> (not confirmed) </em>
+              <% end %>
+            <% else %>
+              Various dates
+            <% end %>
           </a>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <a href="#plan-where" class="text-info">
             <span class="glyphicon glyphicon-map-marker"></span>
-            Makers Of Barcelona, Barcelona (Catalunya)
+            <% num_of_locations = @plan.plan_locations.count
+              if num_of_locations == 0 %>
+              No location yet
+            <% elsif num_of_locations == 1%>
+              @plan.plan_locations[0].name
+            <% else %>
+              Various locations
+            <% end %>
           </a>
         </div>
       </div>
@@ -126,13 +142,22 @@
               <ul>
                 <% @plan.plan_dates.order(:start_date, :end_date).each do |date| %>
 
-                    <div class="row">
+                    <div class="row date-row">
                       <div class="col-md-10">
                         <li>
                         <div class="lead">
                           <strong><%= date.start_date.strftime('%a, %e %b %Y') %>
                             <%= date.end_date.strftime(' - %a, %e %b %Y') unless date.end_date.nil? %>
                           </strong>
+                          &nbsp;
+                          <% if date == @best_date  %>
+                            <small>
+                              <span class="most-popular" data-toggle="tooltip" data-placement="left" title="<%= date.number_of_votes %> votes">
+                                Most popular
+                              </span>
+                            </small>
+                          <% end %>
+
                           <p>
                             <%= if (date.all_day && date.end_date.nil? ) then "All day" end %>
                           </p>
@@ -183,7 +208,7 @@
               <ul>
                 <% @plan.plan_locations.order(:name).each do |location| %>
 
-                    <div class="row">
+                    <div class="row location-row">
                       <div class="col-md-10">
                         <li>
                         <div class="lead">

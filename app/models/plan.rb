@@ -38,6 +38,21 @@ class Plan < ActiveRecord::Base
     User.where('id NOT IN (?)',subscribers_user_ids)
   end
 
+
+  def best_date
+    max_votes = 0
+    result = nil
+    plan_dates.joins(:plan_subscription_ok_dates).order(:start_date, :end_date).each do |plan_date|
+      date_votes = plan_date.plan_subscription_ok_dates.count
+      if (date_votes > max_votes)
+        max_votes = date_votes
+        puts plan_date
+        result = plan_date
+      end
+    end
+    return result
+  end
+
   private
 
   def get_subscriptions_by_status (status)

@@ -60,6 +60,7 @@
 .plan-card:hover{
   background-color: rgb(231,232,239);
 
+
 }
 
 .plan-card .media{
@@ -73,6 +74,8 @@
 .plan-card .plan-image-thumb{
   height: 80px;
   width: 90px;
+  -webkit-filter: opacity(.9);
+   filter: opacity(.9);
 }
 
 .plan-card-new{
@@ -138,13 +141,32 @@
 .plan-card-status-container img {
   position:absolute;
   right: 1em;
-  max-width: 12em;
-  margin: 0;
+  max-width: 8em;
+  margin: 0.8em 0 0 0;
+  -webkit-filter: opacity(.4);
+  filter: opacity(.4);
+
 }
 
 .plan-image{
   width: 100%;
   margin-bottom: 2em;
+}
+
+
+.date-row:hover,
+.location-row:hover {
+  color: black;
+  text-shadow: 0px 0px 8px rgba(150, 150, 150, 1);
+
+}
+
+.most-popular{
+  color: red;
+}
+
+#delete-date {
+  display: none;
 }
 
 #plan-when h1,

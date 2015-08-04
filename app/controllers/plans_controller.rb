@@ -5,13 +5,19 @@ class PlansController < ApplicationController
     @plans_ok = subscriptons_ok.map{|subs| subs.plan}
     subscriptons_ko = current_user.plan_subscriptions.where(status: 'KO')
     @plans_ko = subscriptons_ko.map{|subs| subs.plan}
-    @plans_not_responded = Plan.joins('LEFT JOIN plan_subscriptions ps ON ps.plan_id = plans.id')
-                              .where('ps.id IS NULL OR ps.user_id != '+current_user.id.to_s)
+    # @plans_not_responded = Plan.joins('LEFT JOIN plan_subscriptions ps ON ps.plan_id = plans.id')
+    #                           .where('ps.id IS NULL OR ps.user_id != '+current_user.id.to_s)
+
+    @plans_not_responded = Plan.where('id NOT IN (?)', @plans_ok + @plans_ko)
+
+
+
   end
 
   def show
     @plan = Plan.find(params[:id]) || (render 'layouts/404')
     @plan_subscription = PlanSubscription.find_by(user: current_user, plan: @plan)
+    @best_date = @plan.best_date
     @plan_date = PlanDate.new
     @plan_location = PlanLocation.new
     @users_joining = @plan.users_joining

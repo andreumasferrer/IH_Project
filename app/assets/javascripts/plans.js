@@ -12,4 +12,14 @@ $(document).ready(function() {
   // })
 
 
+
+  $('.date-row').mouseenter(function (e) {
+    $(event.currentTarget).find(".delete-date").show();
+
+  })
+
+  $('.date-row').mouseleave(function (e) {
+    $(event.currentTarget).find(".delte-date").hide();
+  })
+
 });

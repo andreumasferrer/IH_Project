@@ -25,4 +25,9 @@ class PlanDate < ActiveRecord::Base
     return PlanSubscriptionOkDate.find_by(plan_date: self, plan_subscription: subscription)
   end
 
+
+  def number_of_votes
+    plan_subscription_ok_dates.count
+  end
+
 end
