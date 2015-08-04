@@ -5,7 +5,8 @@ class PlansController < ApplicationController
     @plans_ok = subscriptons_ok.map{|subs| subs.plan}
     subscriptons_ko = current_user.plan_subscriptions.where(status: 'KO')
     @plans_ko = subscriptons_ko.map{|subs| subs.plan}
-    @plans_not_responded = Plan.joins('LEFT JOIN plan_subscriptions ps ON ps.plan_id = plans.id').where('ps.id IS NULL')
+    @plans_not_responded = Plan.joins('LEFT JOIN plan_subscriptions ps ON ps.plan_id = plans.id')
+                              .where('ps.id IS NULL OR ps.user_id != '+current_user.id.to_s)
   end
 
   def show
