@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   root 'site#home'
+
+  post 'plancreate' => 'plans#supercreate', as: :superplan
   resources :plans do
       resources :plan_dates, only: [:create, :destroy]
       resources :plan_locations, only: [:create, :destroy]

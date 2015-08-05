@@ -1,0 +1,70 @@
+<%= form_tag('/plancreate', :html => {class: 'form-vertical'}) do %>
+
+<!-- <div class="modal fade" id="new-plan-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title">New plan proposal</h3>
+      </div>
+          <div class="modal-body">
+              <div class="col-sm-12">
+                <h1>WHAT</h1>
+              </div>
+              <div class="col-sm-12">
+                <%= text_field_tag 'name', nil, placeholder: 'Plan name', class: "form-control"  %>
+              </div>
+              <div class="col-sm-12">
+                <%= text_field_tag 'short_desc', nil, placeholder: 'Short description', class: "form-control"  %>
+              </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success">Create plan</button>
+          </div>
+    </div>
+  </div>
+</div>
+ -->
+
+<!-- Modal -->
+<div class="modal fade" id="new-plan-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">New plan proposal</h4>
+      </div>
+      <div class="modal-body">
+          <span class="modal-big_header">WHAT</span> <span class="lead text-muted"> is your plan? </span>
+          <br><br>
+          <div class="form-group">
+            <label for="planName">Plan name</label>
+            <%= text_field_tag 'name', nil, placeholder: 'Your plan name...', id:"planName", class: "form-control input-lg"  %>
+          </div>
+          <div class="form-group">
+            <label for="shortDesc">Short description</label>
+            <%= text_field_tag 'short_desc', nil, placeholder: 'A short description of your plan...',id: "shortDesc", class: "form-control input-lg"  %>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <div class="col-sm-5">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        </div>
+        <div class="col-sm-2">
+          <p id="steps" class="lead pull-left" >
+            1/3
+          </p>
+        </div>
+        <div class="col-sm-5">
+          <p>
+            <button type="submit" id="finish" class="btn btn-success pull-left" disabled data-dismiss="modal">FINISH!</button>
+            <button type="button" id="next-when" class="btn btn-primary pull-right" disabled data-dismiss="modal">Next: WHEN</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

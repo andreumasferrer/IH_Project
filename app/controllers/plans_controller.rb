@@ -41,6 +41,18 @@ class PlansController < ApplicationController
     end
   end
 
+  def supercreate
+    @plan = current_user.plans.new(superplan_params)
+    @plan.status = :PLANNING
+
+    if @plan.save
+      redirect_to plan_path(@plan) #, notice: 'Plan was successfully created.'
+    else
+      flash[:alert] = "Can't create plan"
+      render :new
+    end
+  end
+
   def edit
     @plan = Plan.find(params[:id])
   end
@@ -66,5 +78,9 @@ class PlansController < ApplicationController
 
   def plan_params
     params.require(:plan).permit(:name, :short_desc, :long_desc, :status, :main_image)
+  end
+
+  def superplan_params
+    params.permit(:name, :short_desc, :long_desc, :status, :main_image)
   end
 end
