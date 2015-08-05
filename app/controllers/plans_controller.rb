@@ -50,19 +50,25 @@ class PlansController < ApplicationController
       render :new
     end
 
-    if (params[:start_date] != '')
-
+    if (params[:plan_date][:start_date] != '')
       @plan_date = @plan.plan_dates.new(plan_date_params)
       @plan_date.all_day = true
 
       if !@plan_date.save
         flash[:alert] = "Can't create date proposal"
-        render :show
       end
     end
 
-    redirect_to plan_path(@plan)
+    if (params[:plan_location][:name] != '')
+      @plan_location = @plan.plan_locations.new(plan_location_params)
 
+      if !@plan_location.save
+        flash[:alert] = "Can't create location proposal"
+      end
+
+      redirect_to plan_path(@plan)
+    end
+      
   end
 
   def edit
@@ -92,12 +98,12 @@ class PlansController < ApplicationController
     params.require(:plan).permit(:name, :short_desc, :long_desc, :status, :main_image)
   end
 
-  def superplan_params
-    params.permit(:name, :short_desc, :long_desc, :status, :main_image)
-  end
-
   def plan_date_params
     params.require(:plan_date).permit(:start_date, :end_date, :all_day)
   end
-  
+
+  def plan_location_params
+    params.require(:plan_location).permit(:name, :description, :address)
+  end
+
 end
