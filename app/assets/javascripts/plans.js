@@ -17,7 +17,7 @@ $(document).ready(function() {
 
   /* Super plan modal stuff*/
   $('#finish, #next-when').attr("disabled", "disabled");
-  $('#planName, #shortDesc').change(function (e){
+  $('#planName, #shortDesc').keyup(function (e){
      var validated = true;
      if($('#planName').val().length === 0) validated = false;
      if($('#shortDesc').val().length === 0) validated = false;
@@ -26,7 +26,17 @@ $(document).ready(function() {
      }else{
        $('#finish, #next-when').attr("disabled", "disabled");
      }
-     ;
   })
-  $('#planName').trigger('change');
+  $('#planName').trigger('keyup');
+
+  $('#next-when').click(function (e){
+    $("#what-div").animate({width:'toggle'},350);
+    $('#when-div').fadeIn()
+  })
+
+  $('#previous-what').click(function (e){
+    $("#when-div").hide();
+    $('#what-div').fadeIn()
+  })
+
 });

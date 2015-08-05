@@ -45,12 +45,24 @@ class PlansController < ApplicationController
     @plan = current_user.plans.new(superplan_params)
     @plan.status = :PLANNING
 
-    if @plan.save
-      redirect_to plan_path(@plan) #, notice: 'Plan was successfully created.'
-    else
+    if !@plan.save
       flash[:alert] = "Can't create plan"
       render :new
     end
+
+    if (params[:start_date] != '')
+
+      @plan_date = @plan.plan_dates.new(plan_date_params)
+      @plan_date.all_day = true
+
+      if !@plan_date.save
+        flash[:alert] = "Can't create date proposal"
+        render :show
+      end
+    end
+
+    redirect_to plan_path(@plan)
+
   end
 
   def edit
@@ -82,5 +94,9 @@ class PlansController < ApplicationController
 
   def superplan_params
     params.permit(:name, :short_desc, :long_desc, :status, :main_image)
+  end
+
+  def plan_date_params
+    params.permit(:start_date, :end_date, :all_day)
   end
 end
