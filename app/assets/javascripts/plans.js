@@ -16,6 +16,13 @@ $(document).ready(function() {
   })
 
   /* Super plan modal stuff*/
+  $('#btn-new-plan').click(function (e){
+    $('#planName').trigger('keyup');
+    $("#what-div").show()
+    $("#when-div").hide()
+    $("#where-div").hide()
+  })
+
   $('#finish, #next-when').attr("disabled", "disabled");
   $('#planName, #shortDesc').keyup(function (e){
      var validated = true;

@@ -56,6 +56,7 @@ class PlansController < ApplicationController
 
       if !@plan_date.save
         flash[:alert] = "Can't create date proposal"
+        render :new
       end
     end
 
@@ -64,11 +65,12 @@ class PlansController < ApplicationController
 
       if !@plan_location.save
         flash[:alert] = "Can't create location proposal"
+        render :new
       end
-
-      redirect_to plan_path(@plan)
     end
-      
+
+    redirect_to plan_path(@plan)
+    
   end
 
   def edit

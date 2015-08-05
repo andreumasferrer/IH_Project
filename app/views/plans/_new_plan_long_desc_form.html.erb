@@ -1,0 +1,27 @@
+<div class="modal fade" id="new-long-desc-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title">Write a full description of your plan</h3>
+      </div>
+
+      <%= form_for(plan, html: {multipart: true, class: 'form-vertical'} ) do |f| %>
+      <div class="modal-body">
+      <%= render 'layouts/errors', model: plan %>
+
+
+      <div class="form-group">
+        <%= f.label :long_desc, "Full description", class: "control-label" %>
+        <%= f.text_area :long_desc, cols: 20, rows: 15, class: "form-control"  %>
+      </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+  <% end %>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

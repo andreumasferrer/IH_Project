@@ -1,3 +1,5 @@
+<%= render 'plans/new_plan_image_form', plan: @plan%>
+<%= render 'plans/new_plan_long_desc_form', plan: @plan%>
 <%= render 'plans/new_plan_date_form', plan: @plan, plan_date: @plan_date%>
 <%= render 'plans/new_plan_location_form', plan: @plan, plan_location: @plan_location%>
 
@@ -6,9 +8,11 @@
 <div class="container-fluid">
   <div class="row plan-header">
     <div class="col-md-10 ">
-      <a href="<%=plans_path%>" class="btn btn-info plan-group-btn">
+      <a href="<%=plans_path%>" class="btn btn-default plan-group-btn">
         <span class="glyphicon glyphicon-chevron-left"></span>
-        <strong>Back to: </strong><small><em>Deadly Viper Assassination Squad</em></small>
+        <img src="<%= image_url("GRPAvatar.jpg") %>" alt="Group Image" class="pull-right img-circle group-avatar-xs">
+        Back &nbsp;
+        <!-- <strong>Back to: </strong><small><em>Deadly Viper Assassination Squad</em></small> -->
       </a>
     </div>
     <div class="col-md-2 ">
@@ -74,6 +78,11 @@
               <% if @plan.status != 'ACCEPTED' %>
                 <em> (not confirmed) </em>
               <% end %>
+            <% elsif @plan.plan_dates.count == 1  %>
+              <%= @plan.plan_dates.first.start_date.strftime('%A, %e %B %Y') %>
+              <% if @plan.status != 'ACCEPTED' %>
+                <em> (not confirmed) </em>
+              <% end %>
             <% else %>
               Various dates
             <% end %>
@@ -119,10 +128,31 @@
 
       <div class="plan-what">
           <%= image_tag(@plan.main_image.url, class: "plan-image") if @plan.main_image.present? %>
+          <% if current_user && (current_user.id == @plan.user.id)%>
+            <button type="button" name="button" id ="edit-image-btn" class=" btn btn-info btn-block" data-toggle="modal" data-target="#new-image-modal">
+              <% if @plan.main_image.present? %>
+                Change image
+              <% else %>
+                Add an image
+              <% end %>
+            </button>
+          <% end %>
 
           <p class="lead">
              <%= @plan.long_desc %>
+             <% if current_user && (current_user.id == @plan.user.id)%>
+               <% if @plan.long_desc.present? %>
+                 <a href="#" data-toggle="modal" data-target="#new-long-desc-modal">
+                   &nbsp;<span class="glyphicon glyphicon-pencil"></span> edit
+                 </a>
+               <% else %>
+                 <button type="button" name="button" id ="edit-long-desc" class=" btn btn-xs btn-info" data-toggle="modal" data-target="#new-long-desc-modal">
+                   Add a full description
+                 </button>
+               <% end %>
+             <% end %>
           </p>
+
       </div>
       <br>
       <div id="plan-when">

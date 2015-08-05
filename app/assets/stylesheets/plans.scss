@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 .modal-big_header{
   font-size: 3em;
   font-weight: bolder;
@@ -57,6 +58,12 @@
   min-width: 12em;
   min-height: 12em;
   margin-top: 4.4em;
+}
+
+.group-avatar-xs{
+
+  width: 1.5em;
+  height: 1.5em;
 }
 
 
@@ -159,6 +166,10 @@
 
 .plan-image{
   width: 100%;
+  margin-bottom: 1em;
+}
+
+#edit-image-btn{
   margin-bottom: 2em;
 }
 
