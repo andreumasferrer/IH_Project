@@ -42,7 +42,7 @@ class PlansController < ApplicationController
   end
 
   def supercreate
-    @plan = current_user.plans.new(superplan_params)
+    @plan = current_user.plans.new(plan_params)
     @plan.status = :PLANNING
 
     if !@plan.save
@@ -97,6 +97,7 @@ class PlansController < ApplicationController
   end
 
   def plan_date_params
-    params.permit(:start_date, :end_date, :all_day)
+    params.require(:plan_date).permit(:start_date, :end_date, :all_day)
   end
+  
 end

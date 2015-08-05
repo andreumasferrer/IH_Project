@@ -30,13 +30,25 @@ $(document).ready(function() {
   $('#planName').trigger('keyup');
 
   $('#next-when').click(function (e){
-    $("#what-div").animate({width:'toggle'},350);
+    // $("#what-div").animate({width:'toggle'},350)
+    $("#what-div").hide()
     $('#when-div').fadeIn()
   })
 
   $('#previous-what').click(function (e){
-    $("#when-div").hide();
+    $("#when-div").hide()
     $('#what-div').fadeIn()
+  })
+
+  $('.next-where').click(function (e){
+    // $("#when-div").animate({width:'toggle'},350)
+    $("#when-div").hide()
+    $('#where-div').fadeIn()
+  })
+
+  $('#previous-when').click(function (e){
+    $("#where-div").hide()
+    $('#when-div').fadeIn()
   })
 
 });

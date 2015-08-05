@@ -1,40 +1,47 @@
 <%= form_tag('/plancreate', :html => {class: 'form-vertical'}) do %>
 
 <!-- Modal -->
-<div class="modal fade" id="new-plan-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="new-plan-modal" role="dialog" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
         <h4 class="modal-title" id="myModalLabel">New plan</h4>
       </div>
       <div id="what-div">
         <div class="modal-body">
-            <span class="modal-big_header">WHAT</span> <span class="lead text-muted"> is your plan about? </span>
-            <br><br>
-            <div class="form-group">
-              <label for="planName">Plan name</label>
-              <%= text_field_tag 'name', nil, placeholder: 'Your plan name...', id:"planName", class: "form-control input-lg"  %>
-            </div>
-            <div class="form-group">
-              <label for="shortDesc">Short description</label>
-              <%= text_field_tag 'short_desc', nil, placeholder: 'A short description of your plan...',id: "shortDesc", class: "form-control input-lg"  %>
-            </div>
+          <span class="modal-big_header">WHAT</span>
+          <span class="lead text-muted">
+            is your plan about?
+          </span>
+          <br><br>
+          <div class="form-group">
+            <label for="planName">Plan name</label>
+            <%= text_field_tag 'plan[name]', nil, placeholder: 'Your plan name...', id:"planName", class: "form-control input-lg"  %>
+          </div>
+          <div class="form-group">
+            <label for="shortDesc">Short description</label>
+            <%= text_field_tag 'plan[short_desc]', nil, placeholder: 'A short description of your plan...',id: "shortDesc", class: "form-control input-lg"  %>
+          </div>
         </div>
         <div class="modal-footer">
           <div class="col-sm-5">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            <button class="btn btn-default pull-left" data-dismiss="modal" type="button">Close</button>
           </div>
           <div class="col-sm-2">
-            <p id="steps" class="lead pull-left" >
-              <strong>1</strong>/3
+            <p class="lead pull-left" id="steps">
+              <strong>1</strong>/4
             </p>
           </div>
           <div class="col-sm-5">
             <p>
-              <button type="submit" id="finish" class="btn btn-success pull-left" disabled >FINISH!</button>
-              <button type="button" id="next-when" class="btn btn-primary pull-right" disabled >
-                Next: WHEN<span class="glyphicon glyphicon-chevron-right"></span>
+              <button class="btn btn-success pull-left" disabled  id="finish" type="submit">FINISH!</button>
+              <button class="btn btn-primary pull-right" disabled  id="next-when" type="button">
+                Next: WHEN
+                <span class="glyphicon glyphicon-chevron-right"></span>
               </button>
             </p>
           </div>
@@ -42,49 +49,109 @@
       </div>
       <div id="when-div">
         <div class="modal-body">
-            <span class="modal-big_header">WHEN</span> <span class="lead text-muted"> is it going to be? </span>
-            <br><br>
-            <div class="row">
-              <div class="col-sm-12">
-                <button type="button" id="next-where" class="btn btn-lg btn-warning btn-block" >
-                  Don't know yet
-                </button>
-                <hr>
+          <span class="modal-big_header">WHEN</span>
+          <span class="lead text-muted">
+            is it going to be?
+          </span>
+          <br><br>
+          <div class="row">
+            <div class="col-sm-12">
+              <button class="next-where btn btn-lg btn-warning btn-block" type="button">
+                SKIP / Doesn't matter for now
+              </button>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="startDate">Start date</label>
+                <%= date_field_tag 'plan_date[start_date]', nil, placeholder: 'Enter start date...', id:"startDate", class: "form-control input-lg"  %>
               </div>
             </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="startDate">Start date</label>
-                  <%= date_field_tag 'start_date', nil, placeholder: 'Enter start date...', id:"startDate", class: "form-control input-lg"  %>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="end">End date <em>(optional)</em></label>
-                  <%= date_field_tag 'end_date', nil, placeholder: 'Enter end date...',id: "endDate", class: "form-control input-lg"  %>
-                </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="end">End date
+                  <em>(optional)</em>
+                </label>
+                <%= date_field_tag 'plan_date[end_date]', nil, placeholder: 'Enter end date...',id: "endDate", class: "form-control input-lg"  %>
               </div>
             </div>
-
-
+          </div>
         </div>
         <div class="modal-footer">
           <div class="col-sm-5">
-            <button type="button" id="previous-what" class="btn btn-primary pull-left" >
+            <button class="btn btn-primary pull-left" id="previous-what" type="button">
               <span class="glyphicon glyphicon-chevron-left"></span>Previous: WHAT
             </button>
           </div>
           <div class="col-sm-2">
-            <p id="steps" class="lead pull-left" >
-              <strong>2</strong>/3
+            <p class="lead pull-left" id="steps">
+              <strong>2</strong>/4
             </p>
           </div>
           <div class="col-sm-5">
             <p>
-              <button type="submit" id="finish" class="btn btn-success pull-left" disabled>FINISH!</button>
-              <button type="button" id="next-where" class="btn btn-primary pull-right" >
-                Next: WHERE<span class="glyphicon glyphicon-chevron-right"></span>
+              <button class="btn btn-success pull-left" disabled id="finish" type="submit">FINISH!</button>
+              <button class="next-where btn btn-primary pull-right" type="button">
+                Next:WHERE
+                <span class="glyphicon glyphicon-chevron-right"></span>
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="where-div">
+        <div class="modal-body">
+          <span class="modal-big_header">WHERE</span>
+          <span class="lead text-muted">
+            are you going to meet?
+          </span>
+          <br><br>
+          <div class="row">
+            <div class="col-sm-12">
+              <button class="btn btn-lg btn-warning btn-block" id="next-extra" type="button">
+                  SKIP / Doesn't matter for now
+              </button>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="locationName">Location name</label>
+                <%= text_field_tag 'plan_location[name]', nil, placeholder: 'Your location name...', id:"locationName", class: "form-control input-lg"  %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="address">Address</label>
+                <%= text_field_tag 'plan_location[address]', nil, placeholder: 'Location address...',id: "address", class: "form-control input-lg"  %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div class="col-sm-5">
+            <button class="btn btn-primary pull-left" id="previous-when" type="button">
+              <span class="glyphicon glyphicon-chevron-left"></span>Previous: WHEN
+            </button>
+          </div>
+          <div class="col-sm-2">
+            <p class="lead pull-left" id="steps">
+              <strong>3</strong>/4
+            </p>
+          </div>
+          <div class="col-sm-5">
+            <p>
+              <button class="btn btn-success pull-left" disabled id="finish" type="submit">FINISH!</button>
+              <button class="btn btn-primary pull-right" id="next-extra" type="button">
+                Next: EXTRA
+                <span class="glyphicon glyphicon-chevron-right"></span>
               </button>
             </p>
           </div>

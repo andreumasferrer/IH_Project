@@ -97,7 +97,7 @@
       <div class="plans-content">
         <% if @plan_subscription  %>
           <% if @plan_subscription.status == 'OK' %>
-            <span class="glyphicon glyphicon-ok-sign user-plan-status"></span>
+            <!-- <span class="glyphicon glyphicon-ok-sign user-plan-status"></span> -->
             <div>
                 <%= button_to 'Decline', plan_plan_subscription_path(@plan,@plan.get_subscription(current_user)), method: :patch, params: { status: :KO },
                   data: { confirm: "Are you sure?" }  , class: "btn btn-xs btn-danger"  %>
