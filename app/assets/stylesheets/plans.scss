@@ -178,7 +178,12 @@
 .location-row:hover {
   color: black;
   text-shadow: 0px 0px 8px rgba(150, 150, 150, 1);
+}
 
+.delete-icon {
+  color: gray;
+  margin-right: 2em;
+  display:none;
 }
 
 .most-popular{

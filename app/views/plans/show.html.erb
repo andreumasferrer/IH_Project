@@ -187,6 +187,15 @@
                               </span>
                             </small>
                           <% end %>
+                          <% if current_user && (current_user.id == @plan.user.id)%>
+                            <%= link_to plan_plan_date_path(@plan, date), method: :delete,
+                            data: { confirm: "Are you sure?" }, class: "delete-icon pull-right"  do %>
+
+                              <span class="glyphicon glyphicon-trash"></span>
+
+                            <% end %>
+
+                          <% end %>
 
                           <p>
                             <%= if (date.all_day && date.end_date.nil? ) then "All day" end %>
@@ -207,10 +216,7 @@
                                 plan_date_id: date.id}, class: "btn btn-success btn-sm pull-right" %>
                           <% end %>
                         <% end %>
-                        <% if current_user && (current_user.id == @plan.user.id)%>
-                          <%= button_to 'Delete', plan_plan_date_path(@plan, date), method: :delete,
-                          data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-xs pull-right "  %>
-                        <% end %>
+
 
                         </li>
                      </div>
@@ -243,6 +249,19 @@
                         <li>
                         <div class="lead">
                           <strong><%= location.name %></strong>
+
+                          <% if current_user && (current_user.id == @plan.user.id)%>
+                            <%= link_to plan_plan_location_path(@plan, location), method: :delete,
+                            data: { confirm: "Are you sure?" }, class: "delete-icon pull-right"  do %>
+
+                              <span class="glyphicon glyphicon-trash"></span>
+
+                            <% end %>
+
+                          <% end %>
+
+
+
                           <p>
                             <%= location.address %>
                           </p>

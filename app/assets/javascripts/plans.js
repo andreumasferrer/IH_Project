@@ -6,14 +6,18 @@
 $(document).ready(function() {
 
 
-  $('.date-row').mouseenter(function (e) {
-    $(event.currentTarget).find(".delete-date").show();
+  $('.date-row, .location-row').mouseenter(function (e) {
+    $(".delete-icon").hide();
+    $(event.currentTarget).find(".delete-icon").show();
 
   })
 
   $('.date-row').mouseleave(function (e) {
-    $(event.currentTarget).find(".delte-date").hide();
+    $(".delete-icon").hide();
   })
+
+
+
 
   /* Super plan modal stuff*/
   $('#btn-new-plan').click(function (e){
@@ -57,5 +61,8 @@ $(document).ready(function() {
     $("#where-div").hide()
     $('#when-div').fadeIn()
   })
+
+
+
 
 });
