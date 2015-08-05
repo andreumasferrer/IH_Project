@@ -17,6 +17,25 @@ $(document).ready(function() {
   })
 
 
+  $('.btn-ok-date').mouseenter(function (e) {
+    $(this).removeClass("btn-default");
+    $(this).addClass("btn-success");
+  })
+
+  $('.btn-ok-date').mouseleave(function (e) {
+    $(this).removeClass("btn-success");
+    $(this).addClass("btn-default");
+  })
+
+  $('.btn-ko-date').mouseenter(function (e) {
+    $(this).removeClass("btn-default");
+    $(this).addClass("btn-danger");
+  })
+
+  $('.btn-ko-date').mouseleave(function (e) {
+    $(this).removeClass("btn-danger");
+    $(this).addClass("btn-default");
+  })
 
 
   /* Super plan modal stuff*/

@@ -180,6 +180,18 @@
   text-shadow: 0px 0px 8px rgba(150, 150, 150, 1);
 }
 
+.date-declined {
+
+  -webkit-filter: opacity(.6);
+  filter: opacity(.6);
+}
+.glyphicon-ok{
+  color: green;
+}
+.glyphicon-remove{
+  color: red;
+}
+
 .delete-icon {
   color: gray;
   margin-right: 2em;

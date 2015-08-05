@@ -172,8 +172,8 @@
               <ul>
                 <% @plan.plan_dates.order(:start_date, :end_date).each do |date| %>
 
-                    <div class="row date-row">
-                      <div class="col-md-10">
+                    <div class="row date-row <%='date-declined' unless date.accepted_by_user?(current_user) %> ">
+                      <div class="col-md-7">
                         <li>
                         <div class="lead">
                           <strong><%= date.start_date.strftime('%a, %e %b %Y') %>
@@ -187,39 +187,87 @@
                               </span>
                             </small>
                           <% end %>
-                          <% if current_user && (current_user.id == @plan.user.id)%>
-                            <%= link_to plan_plan_date_path(@plan, date), method: :delete,
-                            data: { confirm: "Are you sure?" }, class: "delete-icon pull-right"  do %>
 
-                              <span class="glyphicon glyphicon-trash"></span>
-
-                            <% end %>
-
-                          <% end %>
 
                           <p>
                             <%= if (date.all_day && date.end_date.nil? ) then "All day" end %>
                           </p>
                         </div>
                       </div>
+                      <div class ="col-md-1">
+
+                        <% if current_user && (current_user.id == @plan.user.id)%>
+                          <%= link_to plan_plan_date_path(@plan, date), method: :delete,
+                          data: { confirm: "Are you sure?" }, class: "delete-icon pull-right"  do %>
+
+                            <span class="glyphicon glyphicon-trash lead"></span>
+
+                          <% end %>
+
+                        <% end %>
+                      </div>
+                      <div class ="col-md-2">
+                          <% if date.accepted_by_user?(current_user) %>
+                            <span class="glyphicon glyphicon-ok"></span> Accepted
+                          <% else %>
+                            <span class="glyphicon glyphicon glyphicon-remove"></span> Rejected
+                          <% end %>
+                      </div>
                       <div class="col-md-2">
                         <% if @plan_subscription %>
-                          <% if date.accepted_by_user?(current_user) %>
-                            <small class="text-muted">Accepted</small>
-                            <% plan_subscription_ok_date = date.get_subscription_ok_date(current_user) %>
-                            <%= button_to 'Decline', plan_subscription_ok_date_path(plan_subscription_ok_date),
-                                method: :delete,  class: "btn btn-warning btn-sm pull-right"%>
-                          <% else %>
-                            <small class="text-muted">Not accepted</small>
-                            <%= button_to 'Accept', plan_subscription_ok_dates_path,
-                                params: {plan_subscription_id: @plan_subscription.id,
-                                plan_date_id: date.id}, class: "btn btn-success btn-sm pull-right" %>
-                          <% end %>
+
+                            <% if date.accepted_by_user?(current_user) %>
+                              <!-- <small class="text-muted">Accepted</small> -->
+                              <% plan_subscription_ok_date = date.get_subscription_ok_date(current_user) %>
+                              <%= form_for(plan_subscription_ok_date, method: :delete) do |f| %>
+
+                                <div class="Xbtn-group">
+
+                                  <button type="submit" class="btn-ko-date btn btn-default btn-block">
+                                    <span class="glyphicon glyphicon-thumbs-down"></span> Reject
+                                  </button>
+                                  <!-- <button type="button" name="button" class= "btn btn-success  disabled">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span> Accept
+                                  </button> -->
+                                  <!-- <%= button_to 'Accept', plan_subscription_ok_dates_path,
+                                      params: {plan_subscription_id: @plan_subscription.id,
+                                      plan_date_id: date.id}, class: "btn btn-success btn-sm" %> -->
+                                </div>
+                              <% end %>
+
+                              <!-- <%= button_to 'Decline', plan_subscription_ok_date_path(plan_subscription_ok_date),
+                                  method: :delete,  class: "btn btn-warning btn-sm pull-right"%>
+                              <button type="button" name="button" class= "btn btn-default btn-sm disabled">
+                                Accept
+                              </button> -->
+                            <% else %>
+                              <% plan_subscription_ok_date = date.plan_subscription_ok_dates.new %>
+                              <%= form_for(plan_subscription_ok_date) do |f| %>
+                                <input type="hidden" name="plan_subscription_id" value="<%=@plan_subscription.id%>">
+                                <input type="hidden" name="plan_date_id" value="<%=date.id%>">
+
+                                <div class="Xbtn-group ">
+                                  <!-- <button type="button" name="button" class= "btn btn-danger  disabled">
+                                    <span class="glyphicon glyphicon-thumbs-down"></span> Reject
+                                  </button> -->
+                                  <button type="submit" class="btn-ok-date btn  btn-default btn-block">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span> Accept
+                                  </button>
+                                  <!-- <%= button_to 'Accept', plan_subscription_ok_dates_path,
+                                      params: {plan_subscription_id: @plan_subscription.id,
+                                      plan_date_id: date.id}, class: "btn btn-success btn-sm" %> -->
+                                </div>
+                              <% end %>
+                            <% end %>
+
+
+
                         <% end %>
 
 
                         </li>
                      </div>
+
                    </div>
                 <% end %>
               </ul>
@@ -249,19 +297,6 @@
                         <li>
                         <div class="lead">
                           <strong><%= location.name %></strong>
-
-                          <% if current_user && (current_user.id == @plan.user.id)%>
-                            <%= link_to plan_plan_location_path(@plan, location), method: :delete,
-                            data: { confirm: "Are you sure?" }, class: "delete-icon pull-right"  do %>
-
-                              <span class="glyphicon glyphicon-trash"></span>
-
-                            <% end %>
-
-                          <% end %>
-
-
-
                           <p>
                             <%= location.address %>
                           </p>
@@ -269,10 +304,13 @@
                       </div>
                       <div class="col-md-2">
                         <% if current_user && (current_user.id == @plan.user.id)%>
-                          <%= button_to 'Delete', plan_plan_location_path(@plan, location), method: :delete,
-                          data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm pull-right"  %>
+                          <%= link_to plan_plan_location_path(@plan, location), method: :delete,
+                          data: { confirm: "Are you sure?" }, class: "delete-icon lead "  do %>
+                            <span class="glyphicon glyphicon-trash "></span>
+                          <% end %>
                         <% end %>
-                        </li>
+
+                      </li>
                      </div>
                    </div>
 
