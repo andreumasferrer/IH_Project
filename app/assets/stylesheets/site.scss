@@ -27,13 +27,14 @@
     height:100vh;
     width: 100%;
     // background: url('http://www.fightlikeaknight.com/WP/wp-content/uploads/2014/08/bg41.jpg') no-repeat center center;
-    background: image-url("landing.jpg") no-repeat center center;  
+    background: image-url("landing.jpg") no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     position: relative;
     display: table;
+
 }
 
 
@@ -42,6 +43,7 @@
   vertical-align: middle;
   text-align: center;
   margin: 0;
+  background-color: rgba(0, 0, 0, 0.35);
 
 }
 
@@ -66,7 +68,7 @@
 
 #landing-hr {
     max-width: 50px;
-    border-color: #f05f40;
+    border-color: rgb(41, 143, 194);
     border-width: 3px;
 }
 
@@ -78,9 +80,9 @@
   text-transform: uppercase;
   font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
   font-weight: 700;
-  border-color: #f05f40;
+  border-color: rgb(41, 143, 194);
   color: #fff;
-  background-color: #f05f40;
+  background-color: rgb(41, 143, 194);
   transition: all .35s;
     transition-property: all;
     transition-duration: 0.35s;
@@ -89,9 +91,9 @@
 }
 
 #main-btn:hover{
-  border-color: #ed431f;
+  border-color: rgb(41, 143, 194);
   color: #fff;
-  background-color: #ee4b28;
+  background-color: rgb(41, 143, 194);
   text-decoration: none;
 }
 

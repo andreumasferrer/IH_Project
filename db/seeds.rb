@@ -10,31 +10,31 @@
 User.destroy_all
 
 #Create test users & plans
-user = User.new(email: 'andreumasferrer@gmail.com',
-                password: '12345678', password_confirmation: '12345678')
+user = User.new(email: 'uma@thurman.com',
+                password: '12345678', password_confirmation: '12345678',
+                first_name: "Black Mamba")
 user.skip_confirmation!
 user.save
 
   plan  = Plan.new(name: "Beer & Barbeque!",
                    short_desc: 'Let\'s get together for an epic BBQ day',
-                   long_desc: Faker::Lorem.paragraph,
-                   image_url: "http://anterosfoundation.com/wp-content/uploads/2015/02/barbecue-party.jpg")
+                   long_desc: Faker::Lorem.paragraph)
   plan.user = user
   plan.plan_dates.new(start_date: DateTime.now+20.days, all_day: true)
   plan.plan_dates.new(start_date: DateTime.now+27.days, all_day: true)
-  plan.plan_locations.new(name: 'Albert\'s place')
+  plan.plan_locations.new(name: 'Umma\'s place')
   plan.save
 
 
-user = User.new(:email => 'andreumasferrer@outlook.com',
-                :password => '12345678', password_confirmation: '12345678')
+user = User.new(:email => 'bill@deadlyviper.com',
+                :password => '12345678', password_confirmation: '12345678',
+                :first_name => 'Bill')
 user.skip_confirmation!
 user.save
 
   plan  = Plan.new(name: 'Beach day',
                  short_desc: 'Let\'s have a nice day at the beach',
-                 long_desc: Faker::Lorem.paragraph,
-                 image_url: "http://www.plettenbergbay.co.za/wp-content/uploads/2013/07/4-home.jpg")
+                 long_desc: Faker::Lorem.paragraph)
   plan.user = user
   plan.plan_dates.new(start_date: DateTime.now+10.days, all_day: true)
   plan.plan_locations.new(name: 'Platja de Garraf')
@@ -43,13 +43,26 @@ user.save
   plan.save
 
 
-#Create 5 more random users
-5.times do |i|
-  user = User.new(email: Faker::Internet.email,
-                  password: "12345678", password_confirmation: '12345678')
+  user = User.new(:email => 'oren@deadlyviper.com',
+                  :password => '12345678', password_confirmation: '12345678',
+                  :first_name => 'O-Ren Ishii')
   user.skip_confirmation!
   user.save
-end
 
+  user = User.new(:email => 'vernita@deadlyviper.com',
+                  :password => '12345678', password_confirmation: '12345678',
+                  :first_name => 'Vernita Green')
+  user.skip_confirmation!
+  user.save
 
-#Create test plans
+  user = User.new(:email => 'elle@deadlyviper.com',
+                  :password => '12345678', password_confirmation: '12345678',
+                  :first_name => 'Elle Driver')
+  user.skip_confirmation!
+  user.save
+
+  user = User.new(:email => 'bud@deadlyviper.com',
+                  :password => '12345678', password_confirmation: '12345678',
+                  :first_name => 'Budd ')
+  user.skip_confirmation!
+  user.save
