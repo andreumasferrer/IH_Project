@@ -1,0 +1,84 @@
+// Place all the styles related to the groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.group-list-avatar {
+  min-width: 8em;
+  min-height: 8em;
+  max-width: 12em;
+  max-height: 12em;
+  margin-top: 4.4em;
+}
+
+.group-list-new {
+  min-width: 8em;
+  min-height: 8em;
+  max-width: 12em;
+  max-height: 12em;
+  margin-top: 4.4em;
+  -webkit-filter: opacity(.3);
+   filter: opacity(.3);
+   border: 5px dashed white;
+   -moz-transform:scale(.50); /* Firefox */
+   -ms-transform:scale(.50); /* IE 9 */
+   -o-transform:scale(.50); /* Opera */
+    transform:scale(.50);
+}
+
+.grp-container{
+  text-align: center;
+}
+
+
+.group-list-avatar:hover{
+   border: none;
+   -webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+     transform:scale(1.25);
+  margin-bottom: 2em;
+  text-decoration: none;
+}
+
+.group-list-new:hover{
+   border: none;
+  -webkit-filter: opacity(1);
+   filter: opacity(1);
+   -webkit-transform:scale(1); /* Safari and Chrome */
+    -moz-transform:scale(1); /* Firefox */
+    -ms-transform:scale(1); /* IE 9 */
+    -o-transform:scale(1); /* Opera */
+     transform:scale(1);
+  margin-bottom: 2em;
+  text-decoration: none;
+}
+
+
+.grp-container:hover .grp-name{
+   border: none;
+  -webkit-filter: opacity(1);
+   filter: opacity(1);
+   -webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+     transform:scale(1.25);
+  text-decoration: none;
+  display: block;
+}
+
+#link-to-group {
+  text-decoration: none;
+
+}
+
+.grp-name{
+  text-align: center;
+  color: black;
+  display:none;
+}
+.grp-container>a:hover {
+  color: black;
+  text-shadow: 0px 0px 8px rgba(150, 150, 150, 1);
+}

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'site#home'
 
+  resources :groups, only: [:index]
   post 'plancreate' => 'plans#supercreate', as: :superplan
   resources :plans do
       resources :plan_dates, only: [:create, :destroy]

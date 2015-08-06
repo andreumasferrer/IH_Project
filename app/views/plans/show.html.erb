@@ -94,7 +94,7 @@
               if num_of_locations == 0 %>
               No location yet
             <% elsif num_of_locations == 1%>
-              @plan.plan_locations[0].name
+              <%= @plan.plan_locations[0].name %>
             <% else %>
               Various locations
             <% end %>
