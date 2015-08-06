@@ -1,0 +1,48 @@
+<div class="modal fade" id="confirm-plan-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title">Confirm plan</h3>
+      </div>
+
+      <%= form_for(plan, html: {multipart: true, class: 'form-vertical'}, method: :patch ) do |f| %>
+      <div class="modal-body">
+      <%= render 'layouts/errors', model: plan %>
+
+      <input type="hidden" name="plan[status]" value="<%= :ACCEPTED %>">
+
+      <% if @plan.plan_dates.empty? %>
+        <p class="lead text-warning">
+          WARNING! Your plan doesn't have a date
+        </p>
+      <% else %>
+      <p class="lead">
+        Your plan is ready to be confirmed.
+      </p>
+
+      <div class="form-group">
+        <%= f.label :plan_date_id, "Date", class: "control-label" %>
+        <%= f.select :plan_date_id,{},{}, { :class => 'form-control' } do %>
+          <% @plan.plan_dates.order(:start_date, :end_date).each do |plan_date| %>
+            <% end_date = plan_date.end_date.nil? ? " " : (plan_date.end_date.strftime(' - %a, %e %b %Y')) %>
+            <% date_str = plan_date.start_date.strftime('%a, %e %b %Y') + end_date %>
+            <% if (plan_date == @best_date) %>
+              <% date_str = date_str + "(Most popular)" %>
+              <%= content_tag(:option, date_str , value: plan_date.id, selected: "selected") %>
+            <% else %>
+              <%= content_tag(:option, date_str , value: plan_date.id) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Confirm plan!</button>
+      </div>
+  <% end %>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

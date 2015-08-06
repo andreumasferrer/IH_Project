@@ -2,7 +2,9 @@
 <%= render 'plans/new_plan_long_desc_form', plan: @plan%>
 <%= render 'plans/new_plan_date_form', plan: @plan, plan_date: @plan_date%>
 <%= render 'plans/new_plan_location_form', plan: @plan, plan_location: @plan_location%>
+<%= render 'confirm_plan_form', plan: @plan, best_date: @best_date%>
 
+<!-- confirm-plan-modal -->
 
 
 <div class="container-fluid">
@@ -30,7 +32,8 @@
             <li role="presentation" class="divider"></li>
             <li role="presentation" class="dropdown-header text-muted">CHANGE STATUS</li>
             <li role="presentation" class="<%='disabled' unless @plan.status != 'ACCEPTED'%>">
-              <%= link_to "Confirm", plan_path(@plan, plan: {status: :ACCEPTED}), method: :patch %>
+              <!-- <%= link_to "Confirm", plan_path(@plan, plan: {status: :ACCEPTED}), method: :patch %> -->
+              <%= link_to "Confirm", "#", data: {toggle: "modal", target: "#confirm-plan-modal"} %>
             </li>
             <li role="presentation" class="<%='disabled' unless @plan.status != 'PLANNING'%>">
               <%= link_to "Reopen", plan_path(@plan, plan: {status: :PLANNING}), method: :patch %>
@@ -73,13 +76,21 @@
             <span class="glyphicon glyphicon-calendar"></span>
             <% if @plan.plan_dates.count == 0 %>
               No dates yet
-            <% elsif @best_date.present? %>
-              <%=@best_date.start_date.strftime('%A, %e %B %Y')%>
-              <% if @plan.status != 'ACCEPTED' %>
-                <em> (not confirmed) </em>
-              <% end %>
+            <% elsif @plan.status == 'ACCEPTED' %>
+              <% plan_date = PlanDate.find(@plan.plan_date_id) %>
+              <% end_date = plan_date.end_date.nil? ? " " : (plan_date.end_date.strftime(' - %a, %e %b %Y')) %>
+              <%= plan_date.start_date.strftime('%a, %e %b %Y') + end_date %>
+            <% elsif @best_date.present?  %>
+              <% end_date = @best_date.end_date.nil? ? " " : (@best_date.end_date.strftime(' - %a, %e %b %Y')) %>
+              <%= @best_date.start_date.strftime('%a, %e %b %Y') + end_date %>
+              <!-- <%=@best_date.start_date.strftime('%A, %e %B %Y')%> -->
+
+              <em> (not confirmed) </em>
+
             <% elsif @plan.plan_dates.count == 1  %>
-              <%= @plan.plan_dates.first.start_date.strftime('%A, %e %B %Y') %>
+              <% end_date = @plan.plan_dates.first.end_date.nil? ? " " : (@plan.plan_dates.first.end_date.strftime(' - %a, %e %b %Y')) %>
+              <%= @plan.plan_dates.first.start_date.strftime('%a, %e %b %Y') + end_date %>
+              <!-- <%= @plan.plan_dates.first.start_date.strftime('%A, %e %B %Y') %> -->
               <% if @plan.status != 'ACCEPTED' %>
                 <em> (not confirmed) </em>
               <% end %>
@@ -95,6 +106,9 @@
               No location yet
             <% elsif num_of_locations == 1%>
               <%= @plan.plan_locations[0].name %>
+              <% if @plan.status != 'ACCEPTED' %>
+                <em> (not confirmed) </em>
+              <% end %>
             <% else %>
               Various locations
             <% end %>
@@ -180,7 +194,7 @@
                             <%= date.end_date.strftime(' - %a, %e %b %Y') unless date.end_date.nil? %>
                           </strong>
                           &nbsp;
-                          <% if date == @best_date  %>
+                          <% if date == @best_date && @plan.plan_dates.count > 1  %>
                             <small>
                               <span class="most-popular" data-toggle="tooltip" data-placement="left" title="<%= date.number_of_votes %> votes">
                                 Most popular
@@ -207,14 +221,17 @@
                         <% end %>
                       </div>
                       <div class ="col-md-2">
+                        <% if @plan_subscription && @plan_subscription.status == 'OK' && @plan.status == 'PLANNING' %>
+
                           <% if date.accepted_by_user?(current_user) %>
                             <span class="glyphicon glyphicon-ok"></span> Accepted
                           <% else %>
                             <span class="glyphicon glyphicon glyphicon-remove"></span> Rejected
                           <% end %>
+                        <% end %>
                       </div>
                       <div class="col-md-2">
-                        <% if @plan_subscription %>
+                        <% if @plan_subscription && @plan_subscription.status == 'OK' && @plan.status == 'PLANNING' %>
 
                             <% if date.accepted_by_user?(current_user) %>
                               <!-- <small class="text-muted">Accepted</small> -->

@@ -70,7 +70,7 @@ class PlansController < ApplicationController
     end
 
     redirect_to plan_path(@plan)
-    
+
   end
 
   def edit
@@ -79,7 +79,12 @@ class PlansController < ApplicationController
 
   def update
     @plan = Plan.find(params[:id])
+
     @plan.update(plan_params)
+
+    if (params[:plan][:plan_date_id])
+      @plan.plan_date_id = params[:plan][:plan_date_id] 
+    end
 
     if @plan.save
       redirect_to plan_path(@plan) #, notice: 'Plan was successfully updated.'

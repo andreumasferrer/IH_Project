@@ -4,6 +4,7 @@ class Plan < ActiveRecord::Base
   has_many :plan_locations, dependent: :destroy
   has_many :plan_subscriptions, dependent: :destroy
   has_many :subscribers, source: :user, through: :plan_subscriptions
+  # has_one  :confirmed_date, class_name: 'PlanDate', foreign_key: "id"
 
 
   has_attached_file :main_image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing_plan.png"
