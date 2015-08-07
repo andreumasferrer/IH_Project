@@ -12,7 +12,8 @@ User.destroy_all
 #Create test users & plans
 user = User.new(email: 'uma@thurman.com',
                 password: '12345678', password_confirmation: '12345678',
-                first_name: "Black Mamba")
+                first_name: "Black",
+                last_name: "Mamba")
 user.skip_confirmation!
 user.save
 
@@ -28,7 +29,8 @@ user.save
 
 user = User.new(:email => 'bill@deadlyviper.com',
                 :password => '12345678', password_confirmation: '12345678',
-                :first_name => 'Bill')
+                :first_name => 'Bill',
+                :last_name => ' ')
 user.skip_confirmation!
 user.save
 
@@ -45,24 +47,28 @@ user.save
 
   user = User.new(:email => 'oren@deadlyviper.com',
                   :password => '12345678', password_confirmation: '12345678',
-                  :first_name => 'O-Ren Ishii')
+                  :first_name => 'O-Ren',
+                  :last_name => 'Ishii')
   user.skip_confirmation!
   user.save
 
   user = User.new(:email => 'vernita@deadlyviper.com',
                   :password => '12345678', password_confirmation: '12345678',
-                  :first_name => 'Vernita Green')
+                  :first_name => 'Vernita',
+                  :last_name => 'Green')
   user.skip_confirmation!
   user.save
 
   user = User.new(:email => 'elle@deadlyviper.com',
                   :password => '12345678', password_confirmation: '12345678',
-                  :first_name => 'Elle Driver')
+                  :first_name => 'Elle',
+                  :last_name => 'Driver')
   user.skip_confirmation!
   user.save
 
   user = User.new(:email => 'bud@deadlyviper.com',
                   :password => '12345678', password_confirmation: '12345678',
-                  :first_name => 'Budd ')
+                  :first_name => 'Budd',
+                  :last_name => ' ')
   user.skip_confirmation!
   user.save
