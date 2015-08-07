@@ -17,32 +17,12 @@ user = User.new(email: 'uma@thurman.com',
 user.skip_confirmation!
 user.save
 
-  plan  = Plan.new(name: "Beer & Barbeque!",
-                   short_desc: 'Let\'s get together for an epic BBQ day',
-                   long_desc: Faker::Lorem.paragraph)
-  plan.user = user
-  plan.plan_dates.new(start_date: DateTime.now+20.days, all_day: true)
-  plan.plan_dates.new(start_date: DateTime.now+27.days, all_day: true)
-  plan.plan_locations.new(name: 'Umma\'s place')
-  plan.save
-
-
 user = User.new(:email => 'bill@deadlyviper.com',
                 :password => '12345678', password_confirmation: '12345678',
                 :first_name => 'Bill',
-                :last_name => ' ')
+                :last_name => '  ')
 user.skip_confirmation!
 user.save
-
-  plan  = Plan.new(name: 'Beach day',
-                 short_desc: 'Let\'s have a nice day at the beach',
-                 long_desc: Faker::Lorem.paragraph)
-  plan.user = user
-  plan.plan_dates.new(start_date: DateTime.now+10.days, all_day: true)
-  plan.plan_locations.new(name: 'Platja de Garraf')
-  plan.plan_locations.new(name: 'Sitges')
-  plan.plan_locations.new(name: 'Calella de Palafrugell')
-  plan.save
 
 
   user = User.new(:email => 'oren@deadlyviper.com',
@@ -69,6 +49,6 @@ user.save
   user = User.new(:email => 'bud@deadlyviper.com',
                   :password => '12345678', password_confirmation: '12345678',
                   :first_name => 'Budd',
-                  :last_name => ' ')
+                  :last_name => '  ')
   user.skip_confirmation!
   user.save
