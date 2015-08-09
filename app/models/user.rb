@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
+  has_many :groups, dependent: :destroy
   has_many :plans, dependent: :destroy
   has_many :plan_subscriptions, dependent: :destroy
   has_many :subscribed_plans, source: :plan, through: :plan_subscriptions
