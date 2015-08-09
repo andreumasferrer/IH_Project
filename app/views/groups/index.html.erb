@@ -1,4 +1,7 @@
+<%= render 'groups/new_group_form', group: @group%>
+
 <br><br><br>
+
 <div class="container">
   <div class="row ">
     <div class="col-md-12 ">
@@ -32,9 +35,10 @@
 
     </div>
     <div class="col-sm-2 grp-container">
-      <a href="/new_plan" class="link-to-group">
+
+      <a href="#" class="link-to-group" data-toggle="modal" data-target="#new-group-modal" >
         <img id="new-group" src="<%= image_url("GRPNew.png") %>" alt="Group Image" class="img-thumbnail img-circle group-list-new">
-        <div class="grp-name">Add group</div>
+        <div class="grp-name">Add new group</div>
       </a>
     </div>
     <div class="col-sm-2 ">

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
+  has_and_belongs_to_many :joined_groups, class_name: "Group"
   has_many :groups, dependent: :destroy
   has_many :plans, dependent: :destroy
   has_many :plan_subscriptions, dependent: :destroy

@@ -1,0 +1,35 @@
+<div class="modal fade" id="new-group-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title">New group</h3>
+      </div>
+
+        <%= form_for(group, :html => {class: 'form-horizontal'}) do |f| %>
+          <div class="modal-body">
+          <%= render 'layouts/errors', model: group %>
+
+          <div class="form-group">
+            <%= f.label :name, "Name", class: "col-sm-3 control-label" %>
+            <div class="col-sm-9">
+              <%= f.text_field :name, class: "form-control"  %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :main_image, "Group image", class: "col-sm-3 control-label" %>
+            <div class="col-sm-9">
+              <%= f.file_field :main_image, class: "form-control"  %>
+            </div>
+          </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Create group</button>
+          </div>
+      <% end %>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

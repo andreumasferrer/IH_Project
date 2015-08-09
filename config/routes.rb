@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post "users" => 'site#home'
   root 'site#home'
 
-  resources :groups, only: [:index]
+  resources :groups, only: [:index, :create, :update]
   post 'plancreate' => 'plans#supercreate', as: :superplan
   resources :plans do
       resources :plan_dates, only: [:create, :destroy]
