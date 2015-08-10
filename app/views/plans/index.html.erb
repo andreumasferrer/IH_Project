@@ -1,8 +1,8 @@
-<%= render 'groups/new_group_form', group: Group.first%>
-<%= render 'plans/new_plan_superform', group: Group.first %>
+<%= render 'groups/new_group_form', group: @group%>
+<%= render 'plans/new_plan_superform', group: @group %>
 
-
-<div class="group-block">
+<!-- style="background: url(&quot;<%= image_url(@group.main_image.url)%>&quot;) no-repeat center center" -->
+<div class="group-block" style="background-image: url(&quot;<%= image_url(@group.main_image.url)%>&quot;)">
   <div class="group-header">
     <div class="container">
       <div class="row">
@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-2">
           <a href="#" class="group-edit" data-toggle="modal" data-target="#new-group-modal" >
-            <img src="<%= image_url("GRPAvatar.jpg") %>" alt="Group Image" class="pull-right img-thumbnail img-circle group-avatar hidden-xs hidden-sm">
+            <img src="<%= image_url(@group.main_image.url(:medium)) %>" alt="Group Image" class="pull-right img-thumbnail img-circle group-avatar hidden-xs hidden-sm">
           </a>
         </div>
       </div>
