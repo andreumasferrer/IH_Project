@@ -121,7 +121,7 @@ class PlansController < ApplicationController
   end
 
   def group_members_only
-    group = Group.find(params[:group_id])
+    group = params[:group_id]? Group.find(params[:group_id]) : Group.find(params[:plan][:group_id])
 
     unless current_user && current_user.joined_groups.includes(group).count > 0
       flash[:message] = 'Access denied. You must be a group member.'
