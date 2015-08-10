@@ -1,4 +1,7 @@
 class PlanSubscriptionOkDatesController < ApplicationController
+
+  before_action :authorize_user
+
   def create
     @plan_subscription = PlanSubscription.find(params[:plan_subscription_id])
     @plan_date = PlanDate.find(params[:plan_date_id])

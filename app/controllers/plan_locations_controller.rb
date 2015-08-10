@@ -1,4 +1,7 @@
 class PlanLocationsController < ApplicationController
+
+  before_action :authorize_user
+
   def create
     @plan = Plan.find(params[:plan_id])
 

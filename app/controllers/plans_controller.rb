@@ -1,4 +1,7 @@
 class PlansController < ApplicationController
+
+  before_action :authorize_user
+
   def index
     @group = Group.find(params[:group_id]) || (render 'layouts/404')
     @members = @group.users.order(:first_name, :email)

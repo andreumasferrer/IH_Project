@@ -1,5 +1,7 @@
 class GroupsController < ApplicationController
 
+  before_action :authorize_user
+
   def index
     @group = Group.new
   end
