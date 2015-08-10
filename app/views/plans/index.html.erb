@@ -1,5 +1,5 @@
-
-<%= render 'plans/new_plan_superform' %>
+<%= render 'groups/new_group_form', group: Group.first%>
+<%= render 'plans/new_plan_superform', group: Group.first %>
 
 
 <div class="group-block">
@@ -7,13 +7,15 @@
     <div class="container">
       <div class="row">
         <div id="group-info" class="col-md-10">
-          <h1 class="group-name">Deadly Viper Assassination Squad</h1>
+          <h1 class="group-name"><%= @group.name %></h1>
           <div class="lead">
             <%= @members.count%> members
           </div>
         </div>
         <div class="col-md-2">
-          <img src="<%= image_url("GRPAvatar.jpg") %>" alt="Group Image" class="pull-right img-thumbnail img-circle group-avatar hidden-xs hidden-sm">
+          <a href="#" class="group-edit" data-toggle="modal" data-target="#new-group-modal" >
+            <img src="<%= image_url("GRPAvatar.jpg") %>" alt="Group Image" class="pull-right img-thumbnail img-circle group-avatar hidden-xs hidden-sm">
+          </a>
         </div>
       </div>
     </div>

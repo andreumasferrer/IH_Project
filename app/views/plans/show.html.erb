@@ -10,7 +10,7 @@
 <div class="container-fluid">
   <div class="row plan-header">
     <div class="col-md-10 ">
-      <a href="<%=plans_path%>" class="btn btn-default plan-group-btn">
+      <a href="<%=plans_path+'?group_id='+@plan.group.id.to_s %>" class="btn btn-default plan-group-btn">
         <span class="glyphicon glyphicon-chevron-left"></span>
         <img src="<%= image_url("GRPAvatar.jpg") %>" alt="Group Image" class="pull-right img-circle group-avatar-xs">
         Back &nbsp;

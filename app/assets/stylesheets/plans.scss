@@ -66,6 +66,11 @@
   height: 1.5em;
 }
 
+.group-edit:hover {
+  -webkit-filter: brightness(1) drop-shadow(5px 5px 20px black);
+  filter: brightness(1) drop-shadow(5px 5px 20px black);
+}
+
 
 .plan-card{
   border: 1px solid rgb(207,213,218);

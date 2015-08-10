@@ -1,14 +1,14 @@
 class PlansController < ApplicationController
   def index
-    @members = User.all.order(:first_name, :email) # TO DO: Change when group model is added
+    @group = Group.find(params[:group_id]) || (render 'layouts/404')
+    @members = @group.users.order(:first_name, :email)
     subscriptons_ok = current_user.plan_subscriptions.where(status: 'OK')
     @plans_ok = subscriptons_ok.map{|subs| subs.plan}
+    @plans_ok = @plans_ok.select{ |plan| plan.group == @group}
     subscriptons_ko = current_user.plan_subscriptions.where(status: 'KO')
     @plans_ko = subscriptons_ko.map{|subs| subs.plan}
-    # @plans_not_responded = Plan.joins('LEFT JOIN plan_subscriptions ps ON ps.plan_id = plans.id')
-    #                           .where('ps.id IS NULL OR ps.user_id != '+current_user.id.to_s)
-
-    @plans_not_responded = Plan.where('id NOT IN (?)', @plans_ok + @plans_ko)
+    @plans_ko = @plans_ko.select{ |plan| plan.group == @group}
+    @plans_not_responded = @group.plans.where('id NOT IN (?)', @plans_ok + @plans_ko)
 
 
 
@@ -43,6 +43,7 @@ class PlansController < ApplicationController
 
   def supercreate
     @plan = current_user.plans.new(plan_params)
+    @plan.group = Group.find(params[:plan][:group_id])
     @plan.status = :PLANNING
 
     if !@plan.save
@@ -83,7 +84,7 @@ class PlansController < ApplicationController
     @plan.update(plan_params)
 
     if (params[:plan][:plan_date_id])
-      @plan.plan_date_id = params[:plan][:plan_date_id] 
+      @plan.plan_date_id = params[:plan][:plan_date_id]
     end
 
     if @plan.save
@@ -102,7 +103,7 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:name, :short_desc, :long_desc, :status, :main_image)
+    params.require(:plan).permit(:group_id, :name, :short_desc, :long_desc, :status, :main_image)
   end
 
   def plan_date_params

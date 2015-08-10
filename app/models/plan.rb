@@ -1,6 +1,6 @@
 class Plan < ActiveRecord::Base
   belongs_to :user #owner, class_name: 'User', foreign_key: "user_id"
-  belongs_to :plan
+  belongs_to :group
   has_many :plan_dates, dependent: :destroy
   has_many :plan_locations, dependent: :destroy
   has_many :plan_subscriptions, dependent: :destroy
