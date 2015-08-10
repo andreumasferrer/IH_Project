@@ -1,6 +1,9 @@
 class PlansController < ApplicationController
 
   before_action :authorize_user
+  before_action :group_members_only, only: [:index, :create, :supercreate]
+  before_action :group_members_only_plan, only: [:show]
+  before_action :plan_owner_only, only: [:edit, :update, :destroy]
 
   def index
     @group = Group.find(params[:group_id]) || (render 'layouts/404')
@@ -115,6 +118,32 @@ class PlansController < ApplicationController
 
   def plan_location_params
     params.require(:plan_location).permit(:name, :description, :address)
+  end
+
+  def group_members_only
+    group = Group.find(params[:group_id])
+
+    unless current_user && current_user.joined_groups.includes(group).count > 0
+      flash[:message] = 'Access denied. You must be a group member.'
+      redirect_to groups_path
+    end
+  end
+
+  def group_members_only_plan
+    plan = Plan.find(params[:id])
+    unless current_user && current_user.joined_groups.includes(plan.group).count > 0
+      flash[:message] = 'Access denied. You must be a group member.'
+      redirect_to groups_path
+    end
+  end
+
+  def plan_owner_only
+    plan = Plan.find(params[:id])
+
+    unless current_user && plan.user == current_user
+      flash[:message] = 'Access denied. You must be the plan owner.'
+      redirect_to groups_path
+    end
   end
 
 end

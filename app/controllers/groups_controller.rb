@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
 
   before_action :authorize_user
+  before_action :group_members_only, only: [:update]
 
   def index
     @group = Group.new
@@ -36,6 +37,14 @@ class GroupsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:name, :main_image)
+  end
+
+  def group_members_only
+    group = Group.find(params[:id])
+    unless current_user && current_user.joined_groups.includes(group)
+      flash[:message] = 'Access denied. You must be a group member.'
+      redirect_to request.referer
+    end
   end
 
 end
