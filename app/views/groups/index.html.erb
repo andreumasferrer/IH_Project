@@ -12,37 +12,97 @@
         </h1>
     </div>
   </div>
-  <div class="row ">
-    <div class="col-sm-2 ">
 
-    </div>
-    <div class="col-sm-2 grp-container">
-      <a href="/plans" class="link-to-group">
-        <img src="<%= image_url("GRPIronhack.jpg") %>" alt="Group Image" class="img-thumbnail img-circle group-list-avatar">
-        <div class="grp-name">Hollywood Friends</div>
-      </a>
-    </div>
-    <div class="col-sm-1 ">
+  <% @groups.each_slice(3) do |three_groups| %>
 
-    </div>
-    <div class="col-sm-2 grp-container">
-      <a href="/plans?group_id=3" class="link-to-group">
-        <img src="<%= image_url("GRPAvatar.jpg") %>" alt="Group Image" class="img-thumbnail img-circle group-list-avatar">
-        <div class="grp-name">Deadly Viper Assassination Squad</div>
-      </a>
-    </div>
-    <div class="col-sm-1 ">
+    <div class="row ">
+      <div class="col-sm-2 ">
 
-    </div>
-    <div class="col-sm-2 grp-container">
+      </div>
+      <div class="col-sm-2 grp-container">
+        <a href="/plans?group_id=<%= three_groups[0].id.to_s %>" class="link-to-group">
+          <img src="<%= image_url(three_groups[0].main_image.url(:medium)) %>" alt="Group Image" class="img-thumbnail img-circle group-list-avatar">
+          <div class="grp-name"><%= three_groups[0].name %></div>
+        </a>
+      </div>
+      <div class="col-sm-1 ">
 
-      <a href="#" class="link-to-group" data-toggle="modal" data-target="#new-group-modal" >
-        <img id="new-group" src="<%= image_url("GRPNew.png") %>" alt="Group Image" class="img-thumbnail img-circle group-list-new">
-        <div class="grp-name">Add new group</div>
-      </a>
-    </div>
-    <div class="col-sm-2 ">
+      </div>
+      <% if three_groups[1] %>
+        <div class="col-sm-2 grp-container">
+          <a href="/plans?group_id=<%= three_groups[1].id.to_s %> " class="link-to-group">
+            <img src="<%= image_url(three_groups[1].main_image.url(:medium)) %>" alt="Group Image" class="img-thumbnail img-circle group-list-avatar">
+            <div class="grp-name"><%= three_groups[1].name %></div>
+          </a>
+        </div>
+      <% else %>
+        <div class="col-sm-2 grp-container">
+          <a href="#" class="link-to-group" data-toggle="modal" data-target="#new-group-modal" >
+            <img id="new-group" src="<%= image_url("GRPNew.png") %>" alt="Group Image" class="img-thumbnail img-circle group-list-new">
+            <div class="grp-name">Add new group</div>
+          </a>
+        </div>
+      <% end %>
+      <div class="col-sm-1 ">
 
+      </div>
+
+      <% if three_groups[2] %>
+        <div class="col-sm-2 grp-container">
+          <a href="/plans?group_id=<%= three_groups[2].id.to_s %> " class="link-to-group">
+            <img src="<%= image_url(three_groups[2].main_image.url(:medium)) %>" alt="Group Image" class="img-thumbnail img-circle group-list-avatar">
+            <div class="grp-name"><%= three_groups[2].name %></div>
+          </a>
+        </div>
+      <% elsif three_groups[1] %>
+        <div class="col-sm-2 grp-container">
+          <a href="#" class="link-to-group" data-toggle="modal" data-target="#new-group-modal" >
+            <img id="new-group" src="<%= image_url("GRPNew.png") %>" alt="Group Image" class="img-thumbnail img-circle group-list-new">
+            <div class="grp-name">Add new group</div>
+          </a>
+        </div>
+      <% else %>
+        <div class="col-sm-2">
+
+        </div>
+      <% end %>
+
+      <div class="col-sm-2 ">
+
+      </div>
     </div>
-  </div>
+
+  <% end %>
+
+  <% if @groups.count % 3 == 0 %>
+
+    <div class="row ">
+      <div class="col-sm-2 ">
+
+      </div>
+      <div class="col-sm-2 grp-container">
+
+      </div>
+      <div class="col-sm-1 ">
+
+      </div>
+      <div class="col-sm-2 grp-container">
+        <a href="#" class="link-to-group" data-toggle="modal" data-target="#new-group-modal" >
+          <img id="new-group" src="<%= image_url("GRPNew.png") %>" alt="Group Image" class="img-thumbnail img-circle group-list-new">
+          <div class="grp-name">Add new group</div>
+        </a>
+      </div>
+      <div class="col-sm-1 ">
+
+      </div>
+      <div class="col-sm-2 grp-container">
+
+      </div>
+      <div class="col-sm-2 ">
+
+      </div>
+    </div>
+
+  <% end %>
+
 </div>

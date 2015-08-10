@@ -5,6 +5,7 @@ class GroupsController < ApplicationController
 
   def index
     @group = Group.new
+    @groups = current_user.groups.order(:name)
   end
 
   def create

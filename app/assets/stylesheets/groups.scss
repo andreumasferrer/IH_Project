@@ -3,16 +3,16 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .group-list-avatar {
-  min-width: 8em;
-  min-height: 8em;
+  min-width: 3em;
+  min-height: 3em;
   max-width: 12em;
   max-height: 12em;
   margin-top: 4.4em;
 }
 
 .group-list-new {
-  min-width: 8em;
-  min-height: 8em;
+  min-width: 3em;
+  min-height: 3em;
   max-width: 12em;
   max-height: 12em;
   margin-top: 4.4em;
@@ -66,6 +66,7 @@
      transform:scale(1.25);
   text-decoration: none;
   display: block;
+  color: black;
 }
 
 #link-to-group {
@@ -75,8 +76,8 @@
 
 .grp-name{
   text-align: center;
-  color: black;
-  display:none;
+  color: gray;
+
 }
 .grp-container>a:hover {
   color: black;
