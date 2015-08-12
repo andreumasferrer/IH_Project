@@ -43,9 +43,8 @@ class GroupsController < ApplicationController
 
     unless user
       user = User.new(email: params[:user][:email],
-                      password: '12345678', password_confirmation: '12345678',
                       first_name: params[:user][:name])
-      user.skip_confirmation!
+      user.send_confirmation_instructions
     end
 
     @group.users << user

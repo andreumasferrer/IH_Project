@@ -120,7 +120,7 @@
       <ul>
         <% @members.each do |member| %>
         <li>
-          <small><%= member.show_name %></small>
+          <small><%= member.show_name %> <em><%= "(unconfirmed)" unless member.confirmed? %></em></small> 
         </li>
         <% end %>
       </ul>
