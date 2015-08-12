@@ -12,7 +12,7 @@
     <div class="col-md-10 ">
       <a href="<%=plans_path+'?group_id='+@plan.group.id.to_s %>" class="btn btn-default plan-group-btn">
         <span class="glyphicon glyphicon-chevron-left"></span>
-        <img src="<%= image_url("GRPAvatar.jpg") %>" alt="Group Image" class="pull-right img-circle group-avatar-xs">
+        <img src="<%= image_url(@plan.group.main_image.url(:thumb)) %>" alt="Group Image" class="pull-right img-circle group-avatar-xs">
         Back &nbsp;
         <!-- <strong>Back to: </strong><small><em>Deadly Viper Assassination Squad</em></small> -->
       </a>

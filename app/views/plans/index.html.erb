@@ -1,5 +1,6 @@
 <%= render 'groups/new_group_form', group: @group%>
 <%= render 'plans/new_plan_superform', group: @group %>
+<%= render 'groups/new_member_form', group: @group %>
 
 <!-- style="background: url(&quot;<%= image_url(@group.main_image.url)%>&quot;) no-repeat center center" -->
 <div class="group-block" style="background-image: url(&quot;<%= image_url(@group.main_image.url)%>&quot;)">
@@ -51,11 +52,11 @@
                   New &nbsp;</a></li>
             <% end %>
 
-            <li><a href="#joined" data-toggle="tab" id="joined-pill">
+            <li <%= 'class=disabled' if @plans_ok.count == 0 %>><a href="#joined" data-toggle="tab" id="joined-pill">
               <span class="badge pull-right"><%= @plans_ok.count%></span>
               Attending &nbsp;</a></li>
 
-            <li><a href="#refused" data-toggle="tab" id="refused-pill">
+            <li <%= 'class=disabled' if @plans_ko.count == 0 %>><a href="#refused" data-toggle="tab" id="refused-pill">
               <span class="badge pull-right"><%= @plans_ko.count%></span>
               Declined &nbsp;</a></li>
           </ul>
@@ -81,10 +82,14 @@
             <p class="lead">New plans</p>
             <%= render 'plans/index/new_plans'%>
           <% end %>
-          <p class="lead">Plans you are attending</p>
-          <%= render 'plans/index/joined_plans'%>
-          <p class="lead">Declined plans </p>
-          <%= render 'plans/index/refused_plans'%>
+          <% if @plans_ok.count > 0 %>
+            <p class="lead">Plans you are attending</p>
+            <%= render 'plans/index/joined_plans'%>
+          <% end %>
+          <% if @plans_ko.count > 0%>
+            <p class="lead">Declined plans </p>
+            <%= render 'plans/index/refused_plans'%>
+          <% end %>
         </div>
         <div class="tab-pane fade" id="new">
           <% if @plans_not_responded.count > 0%>
@@ -92,16 +97,26 @@
           <% end %>
         </div>
         <div class="tab-pane fade" id="joined">
-          <%= render 'plans/index/joined_plans'%>
+          <% if @plans_ok.count > 0 %>
+            <%= render 'plans/index/joined_plans'%>
+          <% end %>
         </div>
         <div class="tab-pane fade" id="refused">
-          <%= render 'plans/index/refused_plans'%>
+          <% if @plans_ok.count > 0 %>
+            <%= render 'plans/index/refused_plans'%>
+          <% end %>
         </div>
       </div>
 
     </div>
     <div class="col-md-3">
-      <p class="lead">Group members</p>
+      <p class="lead">Group members
+      <% if @group.user = current_user %>
+        <a href="#" id= "btn-add-member"  class=" btn btn-xs btn-link pull-right" data-toggle="modal" data-target="#add-member-modal">
+          <strong>Add member</strong>
+        </a>
+      <% end %>
+      </p>
       <ul>
         <% @members.each do |member| %>
         <li>

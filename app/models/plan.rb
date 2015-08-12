@@ -36,8 +36,8 @@ class Plan < ActiveRecord::Base
   def users_not_responding
     # subscriptions_user_ids = self.plan_subscriptions.map {|subscription| subscription.user.id  }
     subscribers_user_ids = subscribers.pluck(:id) #subscribers.map {|user| user.id  }
-    return User.all if subscribers_user_ids.empty?
-    User.where('id NOT IN (?)',subscribers_user_ids)
+    return group.users if subscribers_user_ids.empty?
+    group.users.where('id NOT IN (?)',subscribers_user_ids)
   end
 
 

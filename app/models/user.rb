@@ -13,7 +13,9 @@ class User < ActiveRecord::Base
 
 
   def show_name
-    return first_name+" "+last_name unless first_name.nil?
+    return first_name+" "+last_name unless first_name.nil? || last_name.nil?
+    return first_name unless first_name.nil?
+    return last_name unless last_name.nil? 
     email
   end
 

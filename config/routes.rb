@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'site#home'
 
   resources :groups, only: [:index, :create, :update]
+  put 'groups/:id/addmember' => 'groups#new_member', as: :addmember
   post 'plancreate' => 'plans#supercreate', as: :superplan
   resources :plans do
       resources :plan_dates, only: [:create, :destroy]

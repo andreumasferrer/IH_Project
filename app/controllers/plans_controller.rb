@@ -14,8 +14,12 @@ class PlansController < ApplicationController
     subscriptons_ko = current_user.plan_subscriptions.where(status: 'KO')
     @plans_ko = subscriptons_ko.map{|subs| subs.plan}
     @plans_ko = @plans_ko.select{ |plan| plan.group == @group}
-    @plans_not_responded = @group.plans.where('id NOT IN (?)', @plans_ok + @plans_ko)
 
+    if (@plans_ok.count != 0) || (@plans_ko.count != 0)
+      @plans_not_responded = @group.plans.where('id NOT IN (?)', @plans_ok + @plans_ko)
+    else
+      @plans_not_responded = @group.plans
+    end
 
 
   end
