@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
 
   def index
     @group = Group.new
-    @groups = current_user.groups.order(:name)
+    @groups = current_user.joined_groups.order(:name)
   end
 
   def create
@@ -41,7 +41,7 @@ class GroupsController < ApplicationController
 
     user = User.find_by(email: params[:user][:email])
 
-    unless user 
+    unless user
       user = User.new(email: params[:user][:email],
                       password: '12345678', password_confirmation: '12345678',
                       first_name: params[:user][:name])

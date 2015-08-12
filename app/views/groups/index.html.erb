@@ -7,7 +7,7 @@
     <div class="col-md-12 ">
         <h1 class="plan-name text-center"><strong>Your groups</strong>
           <div class="lead text-muted">
-            2 groups
+            <%= pluralize(current_user.joined_groups.count, 'group') %>
           </div>
         </h1>
     </div>

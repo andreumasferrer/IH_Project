@@ -111,7 +111,7 @@
     </div>
     <div class="col-md-3">
       <p class="lead">Group members
-      <% if @group.user = current_user %>
+      <% if @group.user == current_user %>
         <a href="#" id= "btn-add-member"  class=" btn btn-xs btn-link pull-right" data-toggle="modal" data-target="#add-member-modal">
           <strong>Add member</strong>
         </a>
