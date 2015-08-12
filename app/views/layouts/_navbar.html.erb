@@ -25,7 +25,7 @@
         </li>
         <% else %>
           <li><%= link_to('Login', new_user_session_path) %></li>
-          <li><%= button_to('Sign Up', root_path, :method => :get, form_class: "navbar-form", class: "btn btn-success disabled")  %></li>
+          <li><%= button_to('Sign Up', new_user_registration_path, :method => :get, form_class: "navbar-form", class: "btn btn-success")  %></li>
         <% end %>
 
       </ul>
