@@ -53,10 +53,18 @@ group :development, :test do
   #Project specific gems
   gem 'awesome_print'
   gem 'letter_opener'
-  gem 'faker', '~> 1.4.3'
   gem "better_errors"
   gem "binding_of_caller"
 
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'faker', '~> 1.4.3'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
 end
 
 group :production do
