@@ -30,7 +30,7 @@ Main features:
 - Choose the scheduling and places that work for you.
 
 
-Check it out in www.plansandfriends.com
+Check it out in ~~www.plansandfriends.com~~ [http://xlplans.herokuapp.com/](http://xlplans.herokuapp.com/)
 
 
 ### Landing page
